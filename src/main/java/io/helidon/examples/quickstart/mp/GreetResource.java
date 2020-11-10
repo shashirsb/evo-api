@@ -116,9 +116,10 @@ public class GreetResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         }
 
-        String userid = jsonObject.getString("userid");
+        String _userid = jsonObject.getString("userid");
+        System.out.println(_userid);
 
-        JsonObject loginUser =  findUser("shashi");
+        JsonObject loginUser =  findUser(_userid);
 
         if (!loginUser.containsKey("firstname")) {
             JsonObject entity = JSON.createObjectBuilder()
