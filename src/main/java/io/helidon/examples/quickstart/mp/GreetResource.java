@@ -169,12 +169,12 @@ public class GreetResource {
 
         
         
-        JSON.createObjectBuilder()
-                    .add( "model", "randy")
-                    .add( "manufacturer", "randy")
-                    .add( "efficiency_kwh", "10.2")
-                    .add( "efficiency_info", "10.2 kWh/100 km")
-                    .build();
+        // JSON.createObjectBuilder()
+        //             .add( "model", "randy")
+        //             .add( "manufacturer", "randy")
+        //             .add( "efficiency_kwh", "10.2")
+        //             .add( "efficiency_info", "10.2 kWh/100 km")
+        //             .build();
 
         return JSON.createObjectBuilder()
                     .add( "userid", "randy")
