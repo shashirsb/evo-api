@@ -183,6 +183,8 @@ public class GreetResource {
     }
 
     private JsonObject findUser(String userid) {
+        System.out.println(userid);
+        System.out.println(userid.toString());
         if(userid.toString() == "shashi") {
         return JSON.createObjectBuilder()
                     .add( "userid", userid)
