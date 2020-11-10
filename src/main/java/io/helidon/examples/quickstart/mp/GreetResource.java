@@ -166,16 +166,11 @@ public class GreetResource {
     }
 
     private JsonObject findUser(String userid) {
-
-        
-        
-
-
         return JSON.createObjectBuilder()
                     .add( "userid", "randy")
                     .add( "firstname", "randy")
                     .add( "lastname", "randy")
-                    .add( "customertype", "evowner")
+                    .add( "customertype", "ev")
                     .add( "mobile", "randy")
                     .add( "address", "myaddress")
                     .add( "evinfo", JSON.createObjectBuilder()
@@ -183,6 +178,14 @@ public class GreetResource {
                                         .add( "manufacturer", "randy")
                                         .add( "efficiency_kwh", "10.2")
                                         .add( "efficiency_info", "10.2 kWh/100 km")
+                                        .build())
+                    .add( "evopod", JSON.createObjectBuilder()
+                                        .add( "socketype", "230V, 16A")
+                                        .add( "voltage", "230 V")
+                                        .add( "amperage", "16 A")
+                                        .add( "phase", "1-phase")
+                                        .add( "latitude", "12.9200782")
+                                        .add( "longitude", "77.5307203")
                                         .build())
                     .build();
     }
