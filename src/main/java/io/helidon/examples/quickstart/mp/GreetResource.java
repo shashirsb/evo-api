@@ -166,7 +166,7 @@ public class GreetResource {
 
     private JsonObject findUser(String userid) {
 
-        Json evinfo = new Json();
+        
         
         evinfo.createObjectBuilder()
                     .add( "model", "randy")
