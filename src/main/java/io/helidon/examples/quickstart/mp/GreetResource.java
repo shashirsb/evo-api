@@ -169,7 +169,7 @@ public class GreetResource {
 
         
         
-        evinfo.createObjectBuilder()
+        JSON.createObjectBuilder()
                     .add( "model", "randy")
                     .add( "manufacturer", "randy")
                     .add( "efficiency_kwh", "10.2")
@@ -183,7 +183,12 @@ public class GreetResource {
                     .add( "customertype", "evowner")
                     .add( "mobile", "randy")
                     .add( "address", "myaddress")
-                    .add( "evinfo", evinfo.toString() )
+                    .add( "evinfo", JSON.createObjectBuilder()
+                    .add( "model", "randy")
+                    .add( "manufacturer", "randy")
+                    .add( "efficiency_kwh", "10.2")
+                    .add( "efficiency_info", "10.2 kWh/100 km")
+                    .build() )
                     .build();
     }
 }
