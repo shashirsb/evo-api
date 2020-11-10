@@ -86,6 +86,39 @@ public class GreetResource {
         return createResponse(name);
     }
 
+      /**
+     * Return a greeting message using the name that was provided.
+     *
+     * @param name the name to greet
+     * @return {@link JsonObject}
+     */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Path("/login")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequestBody(name = "userid",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
+    @APIResponses({
+            @APIResponse(name = "normal", responseCode = "204", description = "User login successfull!!"),
+            @APIResponse(name = "missing 'User'", responseCode = "400",
+                    description = "JSON did not contain setting for 'user'")})
+    public Response authUser(JsonObject jsonObject) {
+
+        if (!jsonObject.containsKey("userid")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("error", "No userid provided")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        String userid = jsonObject.getString("userid");
+
+        return findUser(userid);
+    }
+
     /**
      * Set the greeting to use in future messages.
      *
@@ -125,6 +158,27 @@ public class GreetResource {
 
         return JSON.createObjectBuilder()
                 .add("message", msg)
+                .build();
+    }
+
+    private JsonObject findUser(String userid) {
+
+        JSON evinfo = new JSON();
+        evinfo.createObjectBuilder()
+                .add( "model": "randy")
+                .add( "manufacturer": "randy")
+                .add( "efficiency_kwh": "10.2")
+                .add( "efficiency_info": "10.2 kWh/100 km")
+                .build();
+
+        return JSON.createObjectBuilder()
+                .add( "userid": "randy")
+                .add( "firstname": "randy")
+                .add( "lastname": "randy")
+                .add( "customertype": "evowner")
+                .add( "mobile": "randy")
+                .add( "address": "myaddress")
+                .add( "evinfo": evinfo )
                 .build();
     }
 }
