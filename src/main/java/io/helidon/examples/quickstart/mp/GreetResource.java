@@ -11,6 +11,7 @@ import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -116,7 +117,9 @@ public class GreetResource {
 
         String userid = jsonObject.getString("userid");
 
-        return findUser(userid);
+        JsonObject entity =  findUser(userid);
+
+        return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
     }
 
     /**
