@@ -39,7 +39,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
  *
  * The message is returned as a JSON object.
  */
-@Path("/greet")
+@Path("/evo")
 @RequestScoped
 public class GreetResource {
 
@@ -95,7 +95,7 @@ public class GreetResource {
      * @return {@link JsonObject}
      */
     @SuppressWarnings("checkstyle:designforextension")
-    @Path("/login")
+    @Path("/login/{userid}")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
