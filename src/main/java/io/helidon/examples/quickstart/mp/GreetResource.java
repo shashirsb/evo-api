@@ -117,8 +117,6 @@ public class GreetResource {
         }
 
         String _userid = jsonObject.getString("userid");
-        System.out.println(_userid);
-
         JsonObject loginUser =  findUser(_userid.toString());
 
         if (!loginUser.containsKey("firstname")) {
@@ -183,9 +181,8 @@ public class GreetResource {
     }
 
     private JsonObject findUser(String userid) {
-        System.out.println(userid);
-        System.out.println(userid.toString());
-        if(userid.toString() == "shashi") {
+
+        if(userid.equals("shashi") {
         return JSON.createObjectBuilder()
                     .add( "userid", userid)
                     .add( "firstname", "samuel")
