@@ -1,5 +1,5 @@
 
-package io.helidon.examples.quickstart.mp;
+package io.helidon.examples.oracle.madhacks.evo;
 
 import java.util.concurrent.atomic.AtomicReference;
 
