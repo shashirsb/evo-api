@@ -95,7 +95,7 @@ public class GreetResource {
      * @return {@link JsonObject}
      */
     @SuppressWarnings("checkstyle:designforextension")
-    @Path("/login/{userid}")
+    @Path("/login")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -169,12 +169,7 @@ public class GreetResource {
 
         
         
-        // JSON.createObjectBuilder()
-        //             .add( "model", "randy")
-        //             .add( "manufacturer", "randy")
-        //             .add( "efficiency_kwh", "10.2")
-        //             .add( "efficiency_info", "10.2 kWh/100 km")
-        //             .build();
+
 
         return JSON.createObjectBuilder()
                     .add( "userid", "randy")
@@ -184,11 +179,11 @@ public class GreetResource {
                     .add( "mobile", "randy")
                     .add( "address", "myaddress")
                     .add( "evinfo", JSON.createObjectBuilder()
-                    .add( "model", "randy")
-                    .add( "manufacturer", "randy")
-                    .add( "efficiency_kwh", "10.2")
-                    .add( "efficiency_info", "10.2 kWh/100 km")
-                    .build() )
+                                        .add( "model", "randy")
+                                        .add( "manufacturer", "randy")
+                                        .add( "efficiency_kwh", "10.2")
+                                        .add( "efficiency_info", "10.2 kWh/100 km")
+                                        .build())
                     .build();
     }
 }
