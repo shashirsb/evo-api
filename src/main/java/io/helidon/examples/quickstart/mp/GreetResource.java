@@ -164,7 +164,7 @@ public class GreetResource {
                 .build();
     }
 
-    private JsonObject findUser(String userid) {
+    public JsonObject findUser(String userid) {
 
         Json evinfo = new Json();
         
@@ -182,7 +182,7 @@ public class GreetResource {
                     .add( "customertype", "evowner")
                     .add( "mobile", "randy")
                     .add( "address", "myaddress")
-                    .add( "evinfo", evinfo )
+                    .add( "evinfo", evinfo.toString() )
                     .build();
     }
 }
