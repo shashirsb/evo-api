@@ -182,10 +182,11 @@ public class GreetResource {
     }
 
     private JsonObject findUser(String userid) {
+        if(userid == "shashi") {
         return JSON.createObjectBuilder()
-                    .add( "userid", "randy")
-                    .add( "firstname", "randy")
-                    .add( "lastname", "randy")
+                    .add( "userid", userid)
+                    .add( "firstname", "samuel")
+                    .add( "lastname", "varthaman")
                     .add( "customertype", "ev")
                     .add( "mobile", "randy")
                     .add( "address", "myaddress")
@@ -205,4 +206,9 @@ public class GreetResource {
                                         .build())
                     .build();
     }
+    
+    return JSON.createObjectBuilder()
+                .add( "userid", userid)
+                .build();
+}
 }
