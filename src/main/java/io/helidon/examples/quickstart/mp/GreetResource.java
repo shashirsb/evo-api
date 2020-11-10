@@ -118,9 +118,25 @@ public class GreetResource {
 
         String userid = jsonObject.getString("userid");
 
-        JsonObject entity =  findUser(userid);
+        JsonObject loginUser =  findUser(userid);
 
-        return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        if (!loginUser.containsKey("firstname")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("authinfo", "userid does not exists")
+                    .add("auth", "declined")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        JsonObject authReponse = JSON.createObjectBuilder()
+                    .add("auth", "success")
+                    .add("authinfo", "userid was found")
+                    .add("data", loginUser.toString())
+                    .build();
+
+        return Response.status(Response.Status.BAD_REQUEST).entity(authReponse).build();
+
+      
     }
 
     /**
