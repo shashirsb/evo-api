@@ -118,7 +118,7 @@ public class GreetResource {
 
         String userid = jsonObject.getString("userid");
 
-        JsonObject loginUser =  findUser(userid);
+        JsonObject loginUser =  findUser("shashi");
 
         if (!loginUser.containsKey("firstname")) {
             JsonObject entity = JSON.createObjectBuilder()
@@ -206,7 +206,7 @@ public class GreetResource {
                                         .build())
                     .build();
     }
-    
+
     return JSON.createObjectBuilder()
                 .add( "userid", userid)
                 .build();
