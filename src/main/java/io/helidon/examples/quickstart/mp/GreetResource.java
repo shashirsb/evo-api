@@ -131,7 +131,7 @@ public class GreetResource {
         JsonObject authReponse = JSON.createObjectBuilder()
                     .add("auth", "success")
                     .add("authinfo", "userid was found")
-                    .add("data", loginUser.toString())
+                    .add("data", loginUser)
                     .build();
 
         return Response.status(Response.Status.BAD_REQUEST).entity(authReponse).build();
