@@ -43,7 +43,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 @RequestScoped
 public class GreetResource {
 
-    Public static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
+    private static final JsonBuilderFactory JSON, evinfo = Json.createBuilderFactory(Collections.emptyMap());
 
     /**
      * The greeting message provider.
@@ -164,7 +164,7 @@ public class GreetResource {
                 .build();
     }
 
-    public JsonObject findUser(String userid) {
+    private JsonObject findUser(String userid) {
 
         Json evinfo = new Json();
         
