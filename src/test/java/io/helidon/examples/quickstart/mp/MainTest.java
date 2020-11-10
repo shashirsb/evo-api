@@ -33,7 +33,7 @@ class MainTest {
 
         JsonObject jsonObject = client
                 .target(serverUrl)
-                .path("greet")
+                .path("evo")
                 .request()
                 .get(JsonObject.class);
         Assertions.assertEquals("Hello World!", jsonObject.getString("message"),
@@ -41,7 +41,7 @@ class MainTest {
 
         jsonObject = client
                 .target(serverUrl)
-                .path("greet/Joe")
+                .path("evo/Joe")
                 .request()
                 .get(JsonObject.class);
         Assertions.assertEquals("Hello Joe!", jsonObject.getString("message"),
@@ -49,14 +49,14 @@ class MainTest {
 
         Response r = client
                 .target(serverUrl)
-                .path("greet/greeting")
+                .path("evo/greeting")
                 .request()
                 .put(Entity.entity("{\"greeting\" : \"Hola\"}", MediaType.APPLICATION_JSON));
         Assertions.assertEquals(204, r.getStatus(), "PUT status code");
 
         jsonObject = client
                 .target(serverUrl)
-                .path("greet/Jose")
+                .path("evo/Jose")
                 .request()
                 .get(JsonObject.class);
         Assertions.assertEquals("Hola Jose!", jsonObject.getString("message"),
