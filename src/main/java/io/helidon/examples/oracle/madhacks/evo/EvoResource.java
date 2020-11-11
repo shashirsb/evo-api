@@ -46,7 +46,6 @@ import io.helidon.examples.oracle.madhacks.evo.*;
 public class EvoResource {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
-    private static final JsonBuilderFactory evinfo = Json.createBuilderFactory(Collections.emptyMap());
 
     private static final User user =new User();
 

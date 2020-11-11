@@ -82,6 +82,9 @@ import io.helidon.examples.oracle.madhacks.evo.* ;
 @ApplicationScoped@Alternative@Priority(APPLICATION)@Traced
 public class User  {
 
+    private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
+    private static final JsonBuilderFactory evinfo = Json.createBuilderFactory(Collections.emptyMap());
+    
 	public static EvoProvider asp = new EvoProvider("test");
 	public static OracleDatabase db = asp.dbConnect();
 
