@@ -136,7 +136,66 @@ public class EvoResource {
                     .add("data", loginUser)
                     .build();
 
-        return Response.status(Response.Status.ACCEPTED ).entity(authReponse).build();
+        return Response.status(Response.Status.OK ).entity(authReponse).build();
+
+      
+    }
+
+       /**
+     * Return a greeting message using the name that was provided.
+     *
+     * @param name the name to greet
+     * @return {@link JsonObject}
+     */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Path("/signup")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequestBody(name = "userid",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
+    @RequestBody(name = "password",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"password\" : \"test\"}")))
+    @RequestBody(name = "mobile",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"mobile\" : \"777777777777\"}")))
+    @APIResponses({
+            @APIResponse(name = "normal", responseCode = "204", description = "User login successfull!!"),
+            @APIResponse(name = "missing 'User'", responseCode = "400",
+                    description = "JSON did not contain setting for 'user'")})
+    public Response singUpUser(JsonObject jsonObject) {
+
+        if (!jsonObject.containsKey("userid") || !jsonObject.containsKey("password") || !jsonObject.containsKey("mobile")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("error", "No userid provided")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        String _userid = jsonObject.getString("userid");
+        User user =new User();
+        JsonObject loginUser = user.findUser(_userid.toString());
+
+        if (!loginUser.containsKey("firstname")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("authinfo", "userid does not exists")
+                    .add("auth", "declined")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        JsonObject authReponse = JSON.createObjectBuilder()
+                    .add("auth", "success")
+                    .add("authinfo", "userid was found")
+                    .add("data", loginUser)
+                    .build();
+
+        return Response.status(Response.Status.OK ).entity(authReponse).build();
 
       
     }
