@@ -168,7 +168,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
                 return singupJSON.createObjectBuilder()
-                .add("exists", false)
+                .add("exists", true)
                 .add("data", JSON.createObjectBuilder()
                                     .add( "userid", jsonObject.get("userid"))
                                     .add( "firstname",  jsonObject.get("firstname"))

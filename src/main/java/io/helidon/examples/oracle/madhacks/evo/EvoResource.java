@@ -130,6 +130,7 @@ public class EvoResource {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
                     .add("signup", "declined")
+                    .add("data", signUpUser.get("data"))
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         }  else if (signUpUser.get("exists").toString() == "false" && !signUpUser.containsKey("data")) {
@@ -142,7 +143,7 @@ public class EvoResource {
 
         JsonObject authReponse = JSON.createObjectBuilder()
                     .add("signup", "success")
-                    .add("info", "userid was created")
+                    .add("info", "userid was created or found")
                     .add("data", signUpUser.get("data"))
                     .build();
 
