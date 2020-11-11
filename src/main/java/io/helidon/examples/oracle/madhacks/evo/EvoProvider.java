@@ -9,9 +9,7 @@ import javax.inject.Inject;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 ///////////////
 
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonArray;
+
 
 import java.nio.file.*;
 import java.nio.charset.StandardCharsets;
@@ -42,10 +40,6 @@ import oracle.soda.OracleCollection;
 import oracle.soda.OracleDocument;
 import oracle.soda.OracleException;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.ParseException;
-import org.json.simple.parser.JSONParser;
 
 ///////////////
 
