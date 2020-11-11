@@ -197,7 +197,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
             } else {
                 //String _document = "{\"userid\":\"" + userid + "\", \"password\":\"" + password + "\",\"mobile\":\"" + mobile + "\",\"firstname\":\"\",\"lastname\":\"\",\"customertype\":\"\",\"address\":\"\",\"evinfo\": {},\"evopod\": {}}";
 
-                JsonObjeft docObject = JSON.createObjectBuilder()
+                JsonObject docObject = JSON.createObjectBuilder()
                 .add( "userid", userid)
                 .add( "firstname",  password )
                 .add( "lastname",  "")
