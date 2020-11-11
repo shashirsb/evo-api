@@ -161,8 +161,8 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 JSONParser parser = new JSONParser();
                 Object obj = parser.parse(resultDoc.getContentAsString());
 				JSONObject jsonObject = (JSONObject) obj;
-                JSONObject evinfoObj = jsonObject.get("evinfo");
-                JSONObject evopodObj = jsonObject.get("evopod");
+                JSONObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
+                JSONObject evopodObj  = (JSONObject) jsonObject.get("evopod");
 
                 return singupJSON.createObjectBuilder()
                 .add("exists", false)
@@ -206,8 +206,8 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 JSONParser parser = new JSONParser();
                 Object obj = parser.parse(newDoc.getContentAsString());
 				JSONObject jsonObject = (JSONObject) obj;
-                JSONObject evinfoObj = jsonObject.get("evinfo");
-                JSONObject evopodObj = jsonObject.get("evopod");
+                JSONObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
+                JSONObject evopodObj  = (JSONObject) jsonObject.get("evopod");
 
                 return singupJSON.createObjectBuilder()
                                     .add("exists", false)
