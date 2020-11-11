@@ -1,0 +1,29 @@
+Functionality: Login User
+REST API: http://193.122.183.22/evo/login
+Method: POST
+Body: {
+    "userid": "shashi",
+    "password": "test123"
+}
+
+====
+Response Body: {
+    "auth": "success",
+    "authinfo": "userid was found",
+    "data": {
+        "userid": "shashi",
+        "firstname": "samuel",
+        "lastname": "varthaman",
+        "customertype": "ev",
+        "mobile": "randy",
+        "address": "myaddress",
+        "ev": {
+            "model": "randy",
+            "manufacturer": "randy",
+            "efficiency_kwh": "10.2",
+            "efficiency_info": "10.2 kWh/100 km"
+        },
+        "evopod": { }
+    }
+}
+

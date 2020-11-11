@@ -1,0 +1,14 @@
+
+Functionality: Login User
+REST API: http://193.122.183.22/evo/login
+Method: POST
+Body: {
+    "userid": "neo",
+    "password": "test123"
+}
+
+====
+Response Body: {
+    "authinfo": "userid does not exists",
+    "auth": "declined"
+}

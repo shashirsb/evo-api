@@ -1,0 +1,31 @@
+
+Functionality: Login User
+REST API: http://193.122.183.22/evo/login
+Method: POST
+Body: {
+    "userid": "shashi",
+    "password": "test123"
+}
+
+====
+Response Body: {
+    "auth": "success",
+    "authinfo": "userid was found",
+    "data": {
+        "userid": "shashi",
+        "firstname": "samuel",
+        "lastname": "varthaman",
+        "customertype": "evopod",
+        "mobile": "randy",
+        "address": "myaddress",
+        "evinfo": { },
+        "evopod": {
+            "socketype": "230V, 16A",
+            "voltage": "230 V",
+            "amperage": "16 A",
+            "phase": "1-phase",
+            "latitude": "12.9200782",
+            "longitude": "77.5307203"
+        }
+    }
+}
