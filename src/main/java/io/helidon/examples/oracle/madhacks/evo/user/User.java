@@ -161,8 +161,8 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
 
                 JsonParser jParser= Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
 				JsonObject jsonObject = jParser.getObject();
-                JsonObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
-                JsonObject evopodObj  = (JSONObject) jsonObject.get("evopod");
+                JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
+                JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
                 return singupJSON.createObjectBuilder()
                 .add("exists", false)
