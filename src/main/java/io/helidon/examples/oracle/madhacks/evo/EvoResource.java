@@ -156,15 +156,7 @@ public class EvoResource {
     @RequestBody(name = "userid",
             required = true,
             content = @Content(mediaType = "application/json",
-                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")),
-                    name = "password",
-            required = true,
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(type = SchemaType.STRING, example = "{\"password\" : \"test\"}")),
-                    name = "mobile",
-            required = true,
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(type = SchemaType.STRING, example = "{\"mobile\" : \"9797977\"}")))
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
     @APIResponses({
             @APIResponse(name = "normal", responseCode = "204", description = "User login successfull!!"),
             @APIResponse(name = "missing 'User'", responseCode = "400",
@@ -182,9 +174,9 @@ public class EvoResource {
         JsonObject singUpUser = user.signUpUser(jsonObject.getString("userid"),jsonObject.getString("password"),jsonObject.getString("mobile"));
 
         System.out.println(singUpUser.getString("exists"));
-        System.out.println(singUpUser.getString("exists").toString());
+       // System.out.println(singUpUser.getString("exists").toString());
 
-        if (singUpUser.getString("exists")== "true") {
+        if (singUpUser.getString("exists") == "true") {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
                     .add("singup", "declined")
