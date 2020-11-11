@@ -168,12 +168,12 @@ public class EvoResource {
 
         String newGreeting = jsonObject.getString("greeting");
 
-        greetingProvider.setMessage(newGreeting);
+        evoProvider.setMessage(newGreeting);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     private JsonObject createResponse(String who) {
-        String msg = String.format("%s %s!", greetingProvider.getMessage(), who);
+        String msg = String.format("%s %s!", evoProvider.getMessage(), who);
 
         return JSON.createObjectBuilder()
                 .add("message", msg)

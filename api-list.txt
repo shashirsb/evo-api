@@ -1,0 +1,12 @@
+API Development
+1. sign up api
+2. login api
+3. sign up api for ev and evpod
+4. ev owner - dashboard
+5. evpod owner - dashboard
+6. search result 
+7. book evpod 
+8. charging - api
+9. Cost and charges - api
+10. Payment - api
+
