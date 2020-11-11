@@ -327,30 +327,44 @@ public JsonObject updateUser(JsonObject jsonObject) {
                 JsonValue latitude = jsonObject.NULL;
                 JsonValue longitude = jsonObject.NULL;
 
-
+                 firstname = jsonObject.get("firstname");
+                 lastname =  jsonObject.get("lastname");
+                 customertype = jsonObject.get("customertype");
+                 mobile = jsonObject.get("mobile");
+                 address = jsonObject.get("address");
+                 model = evinfoObj.get("model");
+                 manufacturer = evinfoObj.get("manufacturer");
+                 efficiency_kwh = evinfoObj.get("efficiency_kwh");
+                 efficiency_info = evinfoObj.get("efficiency_info");
+                 socketype = evopodObj.get("socketype");
+                 voltage = evopodObj.get("voltage");
+                 amperage = evopodObj.get("amperage");
+                 phase = evopodObj.get("phase");
+                 latitude = evopodObj.get("latitude");
+                 longitude = evopodObj.get("longitude");
 
                 return singupJSON.createObjectBuilder()
                 .add("exists", true)
                 .add("data", JSON.createObjectBuilder()
                                     .add( "userid", jsonObject.get("userid"))
-                                    .add( "firstname",  jsonObject.get("firstname"))
-                                    .add( "lastname",  jsonObject.get("lastname"))
-                                    .add( "customertype", jsonObject.get("customertype") )
-                                    .add( "mobile",  jsonObject.get("mobile"))
-                                    .add( "address", jsonObject.get("address"))
+                                    .add( "firstname",  firstname)
+                                    .add( "lastname",  lastname)
+                                    .add( "customertype",  customertype)
+                                    .add( "mobile", mobile )
+                                    .add( "address", address)
                                     .add( "evinfo", JSON.createObjectBuilder()
-                                                        .add( "model", evinfoObj.get("model"))
-                                                        .add( "manufacturer",evinfoObj.get("manufacturer") )
-                                                        .add( "efficiency_kwh",evinfoObj.get("efficiency_kwh"))
-                                                        .add( "efficiency_info", evinfoObj.get("efficiency_info"))
+                                                        .add( "model",model )
+                                                        .add( "manufacturer",manufacturer )
+                                                        .add( "efficiency_kwh",efficiency_kwh )
+                                                        .add( "efficiency_info", efficiency_info )
                                                         .build())
                                     .add( "evopod", JSON.createObjectBuilder()
-                                                        .add( "socketype",evopodObj.get("socketype"))
-                                                        .add( "voltage",evopodObj.get("voltage"))
-                                                        .add( "amperage",evopodObj.get("amperage"))
-                                                        .add( "phase",evopodObj.get("phase"))
-                                                        .add( "latitude",evopodObj.get("latitude"))
-                                                        .add( "longitude",evopodObj.get("longitude"))
+                                                        .add( "socketype",socketype )
+                                                        .add( "voltage", voltage)
+                                                        .add( "amperage",amperage )
+                                                        .add( "phase", phase)
+                                                        .add( "latitude", latitude)
+                                                        .add( "longitude", longitude)
                                                         .build())
                                     .build())
                 .build();               
