@@ -99,14 +99,16 @@ public class EvoResource {
      * @return {@link JsonObject}
      */
     @SuppressWarnings("checkstyle:designforextension")
-    @Path("/signup")
+    @Path("/singup")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @RequestBody(required = true,
-            content = @Content(mediaType = "application/json"))
+    @RequestBody(name = "userid",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
     @APIResponses({
-            @APIResponse(name = "normal", responseCode = "204", description = "User login successfull!!"),
+            @APIResponse(name = "normal", responseCode = "204", description = "User Singup successfull!!"),
             @APIResponse(name = "missing 'User'", responseCode = "400",
                     description = "JSON did not contain setting for 'user'")})
     public Response singUpUser(JsonObject jsonObject) {
@@ -169,7 +171,7 @@ public class EvoResource {
             @APIResponse(name = "missing 'User'", responseCode = "400",
                     description = "JSON did not contain setting for 'user'")})
     public Response authUser(JsonObject jsonObject) {
-System.out.println("Inside login rest api");
+            System.out.println("Inside login rest api");
         if (!jsonObject.containsKey("userid")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("error", "No userid provided")
