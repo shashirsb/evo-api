@@ -311,7 +311,7 @@ public JsonObject updateUser(JsonObject jsonObject) {
                 JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
-                JsonValue firstname = jsonObject.isNull("firstname") ? "" : jsonObject.get("firstname");
+                JsonValue firstname = jsonObject.isNull("firstname") ? jsonObject.NULL : jsonObject.get("firstname");
                 JsonValue lastname = jsonObject.isNull("lastname") ? "" : jsonObject.get("lastname");
                 JsonValue customertype = jsonObject.isNull("customertype") ? "" : jsonObject.get("customertype");
                 JsonValue mobile = jsonObject.isNull("mobile") ? "" : jsonObject.get("mobile");
