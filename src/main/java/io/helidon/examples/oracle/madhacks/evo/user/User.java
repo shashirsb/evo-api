@@ -309,28 +309,46 @@ public JsonObject updateUser(JsonObject jsonObject) {
                 JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
+                String firstname = jsonObject.isNull("firstname") ? "" : jsonObject.get("firstname");
+                String lastname = jsonObject.isNull("lastname") ? "" : jsonObject.get("lastname");
+                String customertype = jsonObject.isNull("customertype") ? "" : jsonObject.get("customertype");
+                String mobile = jsonObject.isNull("mobile") ? "" : jsonObject.get("mobile");
+                String address = jsonObject.isNull("address") ? "" : jsonObject.get("address");
+                String model = evinfoObj.isNull("model") ? "" : evinfoObj.get("model");
+                String manufacturer = evinfoObj.isNull("manufacturer") ? "" : evinfoObj.get("manufacturer");
+                String efficiency_kwh = evinfoObj.isNull("efficiency_kwh") ? "" : evinfoObj.get("efficiency_kwh");
+                String efficiency_info = evinfoObj.isNull("efficiency_info") ? "" : evinfoObj.get("efficiency_info");
+                String socketype = evopodObj.isNull("socketype") ? "" : evopodObj.get("socketype");
+                String voltage = evopodObj.isNull("voltage") ? "" : evopodObj.get("voltage");
+                String amperage = evopodObj.isNull("amperage") ? "" : evopodObj.get("amperage");
+                String phase = evopodObj.isNull("phase") ? "" : evopodObj.get("phase");
+                String latitude = evopodObj.isNull("latitude") ? "" : evopodObj.get("latitude");
+                String longitude = evopodObj.isNull("firstname") ? "" : evopodObj.get("longitude");
+
+
+
                 return singupJSON.createObjectBuilder()
                 .add("exists", true)
                 .add("data", JSON.createObjectBuilder()
                                     .add( "userid", jsonObject.get("userid"))
-                                    .add( "firstname",  jsonObject.isNull("firstname") ? "" : jsonObject.get("firstname"))
-                                    .add( "lastname",  jsonObject.isNull("lastname") ? "" : jsonObject.get("lastname"))
-                                    .add( "customertype",  jsonObject.isNull("customertype") ? "" : jsonObject.get("customertype"))
-                                    .add( "mobile",  jsonObject.isNull("mobile") ? "" : jsonObject.get("mobile"))
-                                    .add( "address",  jsonObject.isNull("address") ? "" : jsonObject.get("address"))
+                                    .add( "firstname",  firstname)
+                                    .add( "lastname",  lastname)
+                                    .add( "customertype", customertype )
+                                    .add( "mobile",  mobile)
+                                    .add( "address", address )
                                     .add( "evinfo", JSON.createObjectBuilder()
-                                                        .add( "model", evinfoObj.isNull("model") ? "" : evinfoObj.get("model"))
-                                                        .add( "manufacturer", evinfoObj.isNull("manufacturer") ? "" : evinfoObj.get("manufacturer"))
-                                                        .add( "efficiency_kwh", evinfoObj.isNull("efficiency_kwh") ? "" : evinfoObj.get("efficiency_kwh"))
-                                                        .add( "efficiency_info", evinfoObj.isNull("efficiency_info") ? "" : evinfoObj.get("efficiency_info"))
+                                                        .add( "model", model)
+                                                        .add( "manufacturer",manufacturer )
+                                                        .add( "efficiency_kwh", efficiency_kwh)
+                                                        .add( "efficiency_info",efficiency_info )
                                                         .build())
                                     .add( "evopod", JSON.createObjectBuilder()
-                                                        .add( "socketype", evopodObj.isNull("socketype") ? "" : evopodObj.get("socketype"))
-                                                        .add( "voltage", evopodObj.isNull("voltage") ? "" : evopodObj.get("voltage"))
-                                                        .add( "amperage", evopodObj.isNull("amperage") ? "" : evopodObj.get("amperage"))
-                                                        .add( "phase", evopodObj.isNull("phase") ? "" : evopodObj.get("phase"))
-                                                        .add( "latitude", evopodObj.isNull("latitude") ? "" : evopodObj.get("latitude"))
-                                                        .add( "longitude", evopodObj.isNull("longitude") ? "" : evopodObj.get("longitude"))
+                                                        .add( "socketype", socketype)
+                                                        .add( "voltage", voltage)
+                                                        .add( "amperage", amperage)
+                                                        .add( "phase", phase)
+                                                        .add( "latitude", latitude)
+                                                        .add( "longitude", longitude)
                                                         .build())
                                     .build())
                 .build();               
