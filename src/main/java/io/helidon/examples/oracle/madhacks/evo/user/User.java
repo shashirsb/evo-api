@@ -160,6 +160,9 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 System.out.println("User already exists successfully ---------------------");
 
                 JsonParser jParser= Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
+
+                while(jParser.hasNext()){
+                jParser.next();
 				JsonObject jsonObject = jParser.getObject();
                 JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
@@ -189,6 +192,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                                                         .build())
                                     .build())
                 .build();
+                }
 
             } else {
                 String _document = "{\"userid\":\"" + userid + "\", \"password\":\"" + password + "\",\"mobile\":\"" + mobile + "\",\"firstname\":\"\",\"lastname\":\"\",\"customertype\":\"\",\"address\":\"\",\"evinfo\": {},\"evopod\": {}}";
@@ -205,6 +209,8 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 
                 
                 JsonParser jParser=  Json.createParser(new ByteArrayInputStream(newDoc.getContentAsString().getBytes()));
+                while(jParser.hasNext()){
+                jParser.next();
 				JsonObject jsonObject = jParser.getObject();
                 JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
@@ -236,6 +242,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                                     .build();
 
             }
+        }
 
         } catch (Exception e) {
             e.printStackTrace();
