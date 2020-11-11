@@ -182,7 +182,7 @@ public class EvoResource {
         String _userid = jsonObject.getString("userid");
         User user =new User();
         JsonObject loginUser = user.findUser(_userid.toString());
-
+        System.out.println(loginUser.toString());
         if (!loginUser.containsKey("mobile")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("authinfo", "userid does not exists")
