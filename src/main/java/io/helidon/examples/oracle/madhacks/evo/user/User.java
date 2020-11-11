@@ -30,8 +30,6 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Specializes;
 import javax.inject.Inject;
 
-import org.bson.BsonDocument;
-import org.bson.conversions.Bson;
 import org.eclipse.microprofile.opentracing.Traced;
 
 import javax.json.Json;
@@ -75,10 +73,8 @@ import org.json.simple.JSONArray;
 import org.json.simple.parser.ParseException;
 import org.json.simple.parser.JSONParser;
 
-import org.apache.commons.lang3.StringUtils;
 import java.time.LocalDateTime;
 
-import com.google.gson.Gson;
 import io.helidon.examples.oracle.madhacks.evo. * ;
 
 /**
