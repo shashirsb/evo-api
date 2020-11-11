@@ -275,6 +275,79 @@ return JSON.createObjectBuilder()
             .add("exists", false)
             .build();
 }
+    
+
+public JsonObject updateUser(JsonObject jsonObject) {
+
+    try {
+        
+    
+            // Get a collection with the name "socks".
+			// This creates a database table, also named "socks", to store the collection.
+			OracleCollection col = this.db.admin().createCollection("users");
+            // Find all documents in the collection.
+            OracleDocument oraDoc,
+            resultDoc = null;
+            String jsonFormattedString = null;
+
+            OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : \"" + jsonObject.get("userid") + "\"}");
+            System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
+
+            resultDoc = col.find().filter(filterSpec).getOne();
+            // System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
+            // System.out.println(resultDoc.equals(null));
+
+            if (resultDoc != null) {
+
+                //JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
+                System.out.println("User already exists, updated the user  ---------------------");
+
+                JsonParser jParser= Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
+
+                while(jParser.hasNext()){
+                jParser.next();
+                JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
+                JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
+
+                return singupJSON.createObjectBuilder()
+                .add("exists", true)
+                .add("data", JSON.createObjectBuilder()
+                                    .add( "userid", jsonObject.get("userid"))
+                                    .add( "firstname",  jsonObject.get("firstname"))
+                                    .add( "lastname",  jsonObject.get("lastname"))
+                                    .add( "customertype",  jsonObject.get("customertype"))
+                                    .add( "mobile",  jsonObject.get("mobile"))
+                                    .add( "address",  jsonObject.get("address"))
+                                    .add( "evinfo", JSON.createObjectBuilder()
+                                                        .add( "model", evinfoObj.isNull("model") ? null : evinfoObj.get("model"))
+                                                        .add( "manufacturer", evinfoObj.isNull("manufacturer") ? null : evinfoObj.get("manufacturer"))
+                                                        .add( "efficiency_kwh", evinfoObj.isNull("efficiency_kwh") ? null : evinfoObj.get("efficiency_kwh"))
+                                                        .add( "efficiency_info", evinfoObj.isNull("efficiency_info") ? null : evinfoObj.get("efficiency_info"))
+                                                        .build())
+                                    .add( "evopod", JSON.createObjectBuilder()
+                                                        .add( "socketype", evopodObj.isNull("socketype") ? null : evopodObj.get("socketype"))
+                                                        .add( "voltage", evopodObj.isNull("voltage") ? null : evopodObj.get("voltage"))
+                                                        .add( "amperage", evopodObj.isNull("amperage") ? null : evopodObj.get("amperage"))
+                                                        .add( "phase", evopodObj.isNull("phase") ? null : evopodObj.get("phase"))
+                                                        .add( "latitude", evopodObj.isNull("latitude") ? null : evopodObj.get("latitude"))
+                                                        .add( "longitude", evopodObj.isNull("longitude") ? null : evopodObj.get("longitude"))
+                                                        .build())
+                                    .build())
+                .build();               
+            
+
+            } 
+        }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+return JSON.createObjectBuilder()
+            .add( "userid", userid)
+            .add("exists", false)
+            .build();
+}
 	
 	public String createData() {
 

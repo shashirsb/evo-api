@@ -124,10 +124,7 @@ public class EvoResource {
         User user =new User();
         JsonObject signUpUser = user.signUpUser(jsonObject.getString("userid"),jsonObject.getString("password"),jsonObject.getString("mobile"));
 
-        System.out.println("1-------------------------------");
-        System.out.println(signUpUser.toString());
-        System.out.println(signUpUser.get("exists").toString());
-        System.out.println("2-------------------------------");
+
        // System.out.println(singUpUser.getString("exists").toString());
 
         if (signUpUser.get("exists") == JsonValue.TRUE) {
@@ -155,6 +152,68 @@ public class EvoResource {
 
       
     }
+
+
+       /**
+     * Return a greeting message using the name that was provided.
+     *
+     * @param name the name to greet
+     * @return {@link JsonObject}
+     */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Path("/updateUser")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequestBody(name = "userid",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
+    @APIResponses({
+            @APIResponse(name = "normal", responseCode = "204", description = "User Signup successfull!!"),
+            @APIResponse(name = "missing 'User'", responseCode = "400",
+                    description = "JSON did not contain setting for 'user'")})
+    public Response updateUser(JsonObject jsonObject) {
+        System.out.println("Inside signup rest api");
+        if (!jsonObject.containsKey("userid")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("error", "No userid provided")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        User user =new User();
+        JsonObject updateUser = user.updateUser(jsonObject);
+
+
+       // System.out.println(singUpUser.getString("exists").toString());
+
+        if (updateUser.get("exists") == JsonValue.TRUE) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("info", "userid already exists")
+                    .add("update", "declined")
+                    .add("data", updateUser.get("data"))
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }  else if (updateUser.get("exists") == JsonValue.FALSE && !updateUser.containsKey("data")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("info", "something went wrong")
+                    .add("update", "declined")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        } 
+
+        JsonObject updateReponse = JSON.createObjectBuilder()
+                    .add("update", "success")
+                    .add("info", "userid was created or found")
+                    .add("data", updateUser.get("data"))
+                    .build();
+
+        return Response.status(Response.Status.OK ).entity(updateReponse).build();
+
+      
+    }
+
 
       /**
      * Return a greeting message using the name that was provided.
