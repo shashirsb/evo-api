@@ -47,7 +47,6 @@ public class EvoResource {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
 
-    private static final User user =new User();
 
     /**
      * The greeting message provider.
@@ -120,6 +119,7 @@ public class EvoResource {
         }
 
         String _userid = jsonObject.getString("userid");
+        User user =new User();
         JsonObject loginUser = user.findUser(_userid.toString());
 
         if (!loginUser.containsKey("firstname")) {
