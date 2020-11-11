@@ -36,7 +36,7 @@ import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonArray;
 
-import java.nio.file. * ;
+import java.nio.file.* ;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -47,7 +47,7 @@ import io.helidon.webserver.ServerRequest;
 import io.helidon.webserver.ServerResponse;
 import io.helidon.webserver.Service;
 
-import java.io. * ;
+import java.io.* ;
 import java.util.Properties;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -75,7 +75,7 @@ import org.json.simple.parser.JSONParser;
 
 import java.time.LocalDateTime;
 
-import io.helidon.examples.oracle.madhacks.evo. * ;
+import io.helidon.examples.oracle.madhacks.evo.* ;
 
 /**
  * An implementation of
