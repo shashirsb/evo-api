@@ -297,7 +297,7 @@ public JsonObject updateUser(JsonObject jsonObject) {
 
             resultDoc = col.find().filter(filterSpec).getOne();
             // System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
-            System.out.println(JsonObject.toString());
+            System.out.println(jsonObject.toString());
 
             if (resultDoc != null) {
 
