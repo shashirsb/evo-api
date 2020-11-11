@@ -32,10 +32,6 @@ import javax.inject.Inject;
 
 import org.eclipse.microprofile.opentracing.Traced;
 
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonArray;
-
 import java.nio.file.* ;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -68,10 +64,10 @@ import oracle.soda.OracleCollection;
 import oracle.soda.OracleDocument;
 import oracle.soda.OracleException;
 
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
-import org.json.simple.parser.ParseException;
-import org.json.simple.parser.JSONParser;
+import javax.json.Json;
+import javax.json.JsonBuilderFactory;
+import javax.json.JsonObject;
+import javax.ws.rs.Consumes;
 
 import java.time.LocalDateTime;
 
@@ -99,7 +95,6 @@ public class User  {
 	}
 
     public JsonObject findUser(String userid) {
-
         if(userid.equals("shashi")) {
         return JSON.createObjectBuilder()
                     .add( "userid", userid)
@@ -124,7 +119,6 @@ public class User  {
                                         .build())
                     .build();
     }
-
     return JSON.createObjectBuilder()
                 .add( "userid", userid)
                 .build();
