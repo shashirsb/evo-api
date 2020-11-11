@@ -193,7 +193,7 @@ public class EvoResource {
         JsonObject authReponse = JSON.createObjectBuilder()
                     .add("singup", "success")
                     .add("info", "userid was created")
-                    .add("data", loginUser.getString("data"))
+                    .add("data", singUpUser.getString("data"))
                     .build();
 
         return Response.status(Response.Status.OK ).entity(authReponse).build();
