@@ -26,7 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import io.helidon.examples.oracle.madhacks.evo.*;
-import io.helidon.examples.oracle.madhacks.evo.user.User;
+// import io.helidon.examples.oracle.madhacks.evo.User;
 
 /**
  * A simple JAX-RS resource to greet you. Examples:
@@ -173,7 +173,7 @@ public class EvoResource {
         User user =new User();
         JsonObject loginUser = user.signUpUser(jsonObject.getString("userid"),jsonObject.getString("password"),jsonObject.getString("mobile"));
 
-        if (!loginUser.getString("exists")) {
+        if (loginUser.getString("exists") == "true") {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
                     .add("singup", "declined")
