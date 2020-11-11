@@ -290,7 +290,7 @@ public JsonObject updateUser(JsonObject jsonObject) {
             resultDoc = null;
             String jsonFormattedString = null;
 
-            OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : \"" + jsonObject.get("userid") + "\"}");
+            OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + "}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
             resultDoc = col.find().filter(filterSpec).getOne();
