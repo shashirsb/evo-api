@@ -108,10 +108,10 @@ public class EvoResource {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
     @APIResponses({
-            @APIResponse(name = "normal", responseCode = "204", description = "User Singup successfull!!"),
+            @APIResponse(name = "normal", responseCode = "204", description = "User Signup successfull!!"),
             @APIResponse(name = "missing 'User'", responseCode = "400",
                     description = "JSON did not contain setting for 'user'")})
-    public Response singUpUser(JsonObject jsonObject) {
+    public Response signUpUser(JsonObject jsonObject) {
         System.out.println("Inside signup rest api");
         if (!jsonObject.containsKey("userid") || !jsonObject.containsKey("password") || !jsonObject.containsKey("mobile")) {
             JsonObject entity = JSON.createObjectBuilder()
@@ -129,19 +129,19 @@ public class EvoResource {
         if (signUpUser.getString("exists") == "true") {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
-                    .add("singup", "declined")
+                    .add("signup", "declined")
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         }  else if (signUpUser.getString("exists") == "false" && !signUpUser.containsKey("data")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "something went wrong")
-                    .add("singup", "declined")
+                    .add("signup", "declined")
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         }
 
         JsonObject authReponse = JSON.createObjectBuilder()
-                    .add("singup", "success")
+                    .add("signup", "success")
                     .add("info", "userid was created")
                     .add("data", signUpUser.getString("data"))
                     .build();
