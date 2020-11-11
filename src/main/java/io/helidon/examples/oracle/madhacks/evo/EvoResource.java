@@ -26,6 +26,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import io.helidon.examples.oracle.madhacks.evo.*;
+import io.helidon.examples.oracle.madhacks.evo.user.User;
 
 /**
  * A simple JAX-RS resource to greet you. Examples:
@@ -122,7 +123,7 @@ public class EvoResource {
         User user =new User();
         JsonObject loginUser = user.findUser(_userid.toString());
 
-        if (!loginUser.containsKey("firstname")) {
+        if (!loginUser.containsKey("mobile")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("authinfo", "userid does not exists")
                     .add("auth", "declined")
@@ -169,21 +170,26 @@ public class EvoResource {
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         }
 
-        String _userid = jsonObject.getString("userid");
         User user =new User();
-        JsonObject loginUser = user.findUser(_userid.toString());
+        JsonObject loginUser = user.signUpUser(jsonObject.getString("userid"),jsonObject.getString("password"),jsonObject.getString("mobile"));
 
-        if (!loginUser.containsKey("firstname")) {
+        if (!loginUser.getString("exists")) {
             JsonObject entity = JSON.createObjectBuilder()
-                    .add("authinfo", "userid does not exists")
-                    .add("auth", "declined")
+                    .add("info", "userid already exists")
+                    .add("singup", "declined")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }  else if (!jsonObject.containsKey("exists")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("info", "something went wrong")
+                    .add("singup", "declined")
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         }
 
         JsonObject authReponse = JSON.createObjectBuilder()
-                    .add("auth", "success")
-                    .add("authinfo", "userid was found")
+                    .add("singup", "success")
+                    .add("info", "userid was created")
                     .add("data", loginUser)
                     .build();
 

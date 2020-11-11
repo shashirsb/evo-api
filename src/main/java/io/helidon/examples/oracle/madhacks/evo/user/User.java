@@ -128,6 +128,62 @@ public class User  {
                 .add( "userid", userid)
                 .build();
 }
+
+public JsonObject signUpUser(String userid,String password,String mobile) {
+
+    try {
+        
+    
+            // Get a collection with the name "socks".
+			// This creates a database table, also named "socks", to store the collection.
+			OracleCollection col = this.db.admin().createCollection("users");
+            // Find all documents in the collection.
+            OracleDocument oraDoc,
+            resultDoc = null;
+            String jsonFormattedString = null;
+
+            OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : \"" + userid + "\"}");
+            System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
+
+            resultDoc = col.find().filter(filterSpec).getOne();
+            // System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
+            // System.out.println(resultDoc.equals(null));
+
+            if (resultDoc != null) {
+
+                JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
+                jsonobject.createObjectBuilder()
+                            .add("exists", true)
+                            .build();
+                return jsonobject;
+
+            } else {
+                String _document = "{\"userid\":\"" + userid + "\", \"password\":\"" + password + "\",\"mobile\":\"" + mobile + "\",\"firstname\":\"\",\"lastname\":\"\",\"customertype\":\"\",\"address\":\"\",\"evinfo\": {},\"evopod\": {}}";
+
+				// Create a JSON document.
+				OracleDocument doc = this.db.createDocumentFromString(_document);
+
+				// Insert the document into a collection.
+                OracleDocument newDoc = col.insertAndGet(doc);
+                JSONObject jsonobject = new JSONObject(newDoc.getContentAsString());  
+                System.out.println("singup " + userid +" .... 200OK");
+                
+                jsonobject.createObjectBuilder()
+                            .add("exists", false)
+                            .build();
+
+                return jsonobject;
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+return JSON.createObjectBuilder()
+            .add( "userid", userid)
+            .build();
+}
 	
 	public String createData() {
 
