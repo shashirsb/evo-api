@@ -191,25 +191,24 @@ public class EvoResource {
         if (updateUser.get("exists") == JsonValue.TRUE) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
-                    .add("update", "declined")
+                    .add("update", "success")
                     .add("data", updateUser.get("data"))
                     .build();
-            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+            return Response.status(Response.Status.OK).entity(entity).build();
         }  else if (updateUser.get("exists") == JsonValue.FALSE && !updateUser.containsKey("data")) {
             JsonObject entity = JSON.createObjectBuilder()
-                    .add("info", "something went wrong")
+                    .add("info", "something went wrong or user doesnt exists")
                     .add("update", "declined")
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         } 
 
         JsonObject updateReponse = JSON.createObjectBuilder()
-                    .add("update", "success")
-                    .add("info", "userid was created or found")
-                    .add("data", updateUser.get("data"))
+                    .add("update", "decline")
+                    .add("info", "Error in your request")
                     .build();
 
-        return Response.status(Response.Status.OK ).entity(updateReponse).build();
+        return Response.status(Response.Status.BAD_REQUEST ).entity(updateReponse).build();
 
       
     }
