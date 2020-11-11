@@ -123,7 +123,7 @@ public class EvoResource {
         User user =new User();
         JsonObject signUpUser = user.signUpUser(jsonObject.getString("userid"),jsonObject.getString("password"),jsonObject.getString("mobile"));
 
-        System.out.println(signUpUser.getString("exists"));
+        System.out.println(signUpUser.toString());
        // System.out.println(singUpUser.getString("exists").toString());
 
         if (signUpUser.getString("exists") == "true") {
