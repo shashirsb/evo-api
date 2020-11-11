@@ -152,18 +152,10 @@ public class EvoResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @RequestBody(name = "userid",
+    @RequestBody(name = "singUpDetails",
             required = true,
             content = @Content(mediaType = "application/json",
                     schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
-    @RequestBody(name = "password",
-            required = true,
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(type = SchemaType.STRING, example = "{\"password\" : \"test\"}")))
-    @RequestBody(name = "mobile",
-            required = true,
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(type = SchemaType.STRING, example = "{\"mobile\" : \"777777777777\"}")))
     @APIResponses({
             @APIResponse(name = "normal", responseCode = "204", description = "User login successfull!!"),
             @APIResponse(name = "missing 'User'", responseCode = "400",
