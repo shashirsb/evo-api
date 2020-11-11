@@ -86,7 +86,7 @@ import io.helidon.examples.oracle.madhacks.evo.* ;
 @ApplicationScoped@Alternative@Priority(APPLICATION)@Traced
 public class User  {
 
-	public static EvoProvider asp = new EvoProvider();
+	public static EvoProvider asp = new EvoProvider("test");
 	public static OracleDatabase db = asp.dbConnect();
 
 	@Inject
