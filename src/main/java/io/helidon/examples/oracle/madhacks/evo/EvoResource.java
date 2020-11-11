@@ -132,7 +132,7 @@ public class EvoResource {
                     .add("signup", "declined")
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
-        }  else if (signUpUser.getString("exists") == "false" && !signUpUser.containsKey("data")) {
+        }  else if (signUpUser.getString("exists").toString() == "false" && !signUpUser.containsKey("data")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "something went wrong")
                     .add("signup", "declined")
