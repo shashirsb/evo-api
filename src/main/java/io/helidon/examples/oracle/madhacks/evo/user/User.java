@@ -160,9 +160,9 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 System.out.println("User already exists successfully ---------------------");
 
                 JsonParser jParser= Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
-				JSONObject jsonObject = jParser.getObject();
-                JSONObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
-                JSONObject evopodObj  = (JSONObject) jsonObject.get("evopod");
+				JsonObject jsonObject = jParser.getObject();
+                JsonObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
+                JsonObject evopodObj  = (JSONObject) jsonObject.get("evopod");
 
                 return singupJSON.createObjectBuilder()
                 .add("exists", false)
@@ -205,9 +205,9 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 
                 
                 JsonParser jParser=  Json.createParser(new ByteArrayInputStream(newDoc.getContentAsString().getBytes()));
-				JSONObject jsonObject = jParser.getObject();
-                JSONObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
-                JSONObject evopodObj  = (JSONObject) jsonObject.get("evopod");
+				JsonObject jsonObject = jParser.getObject();
+                JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
+                JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
                 return singupJSON.createObjectBuilder()
                                     .add("exists", false)
