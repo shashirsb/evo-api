@@ -311,21 +311,21 @@ public JsonObject updateUser(JsonObject jsonObject) {
                 JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
-                JsonValue firstname = jsonObject.isNull("firstname") ? jsonObject.NULL : jsonObject.get("firstname");
-                JsonValue lastname = jsonObject.isNull("lastname") ? jsonObject.NULL : jsonObject.get("lastname");
-                JsonValue customertype = jsonObject.isNull("customertype") ? jsonObject.NULL  : jsonObject.get("customertype");
-                JsonValue mobile = jsonObject.isNull("mobile") ? jsonObject.NULL  : jsonObject.get("mobile");
-                JsonValue address = jsonObject.isNull("address") ? jsonObject.NULL  : jsonObject.get("address");
-                JsonValue model = evinfoObj.isNull("model") ? jsonObject.NULL  : evinfoObj.get("model");
-                JsonValue manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL  : evinfoObj.get("manufacturer");
-                JsonValue efficiency_kwh = evinfoObj.isNull("efficiency_kwh") ? jsonObject.NULL  : evinfoObj.get("efficiency_kwh");
-                JsonValue efficiency_info = evinfoObj.isNull("efficiency_info") ? jsonObject.NULL  : evinfoObj.get("efficiency_info");
-                JsonValue socketype = evopodObj.isNull("socketype") ? jsonObject.NULL  : evopodObj.get("socketype");
-                JsonValue voltage = evopodObj.isNull("voltage") ? jsonObject.NULL  : evopodObj.get("voltage");
-                JsonValue amperage = evopodObj.isNull("amperage") ? jsonObject.NULL  : evopodObj.get("amperage");
-                JsonValue phase = evopodObj.isNull("phase") ? jsonObject.NULL  : evopodObj.get("phase");
-                JsonValue latitude = evopodObj.isNull("latitude") ? jsonObject.NULL  : evopodObj.get("latitude");
-                JsonValue longitude = evopodObj.isNull("firstname") ? jsonObject.NULL  : evopodObj.get("longitude");
+                JsonValue firstname = jsonObject.NULL;
+                JsonValue lastname =  jsonObject.NULL;
+                JsonValue customertype = jsonObject.NULL;
+                JsonValue mobile = jsonObject.NULL;
+                JsonValue address = jsonObject.NULL;
+                JsonValue model = jsonObject.NULL ;
+                JsonValue manufacturer = jsonObject.NULL;
+                JsonValue efficiency_kwh = jsonObject.NULL;
+                JsonValue efficiency_info = jsonObject.NULL;
+                JsonValue socketype = jsonObject.NULL;
+                JsonValue voltage = jsonObject.NULL;
+                JsonValue amperage = jsonObject.NULL;
+                JsonValue phase = jsonObject.NULL;
+                JsonValue latitude = jsonObject.NULL;
+                JsonValue longitude = jsonObject.NULL;
 
 
 
@@ -333,24 +333,24 @@ public JsonObject updateUser(JsonObject jsonObject) {
                 .add("exists", true)
                 .add("data", JSON.createObjectBuilder()
                                     .add( "userid", jsonObject.get("userid"))
-                                    .add( "firstname",  firstname)
-                                    .add( "lastname",  lastname)
-                                    .add( "customertype", customertype )
-                                    .add( "mobile",  mobile)
-                                    .add( "address", address )
+                                    .add( "firstname",  jsonObject.get("firstname"))
+                                    .add( "lastname",  jsonObject.get("lastname"))
+                                    .add( "customertype", jsonObject.get("customertype") )
+                                    .add( "mobile",  jsonObject.get("mobile"))
+                                    .add( "address", jsonObject.get("address"))
                                     .add( "evinfo", JSON.createObjectBuilder()
-                                                        .add( "model", model)
-                                                        .add( "manufacturer",manufacturer )
-                                                        .add( "efficiency_kwh", efficiency_kwh)
-                                                        .add( "efficiency_info",efficiency_info )
+                                                        .add( "model", evinfoObj.get("model"))
+                                                        .add( "manufacturer",evinfoObj.get("manufacturer") )
+                                                        .add( "efficiency_kwh",evinfoObj.get("efficiency_kwh"))
+                                                        .add( "efficiency_info", evinfoObj.get("efficiency_info"))
                                                         .build())
                                     .add( "evopod", JSON.createObjectBuilder()
-                                                        .add( "socketype", socketype)
-                                                        .add( "voltage", voltage)
-                                                        .add( "amperage", amperage)
-                                                        .add( "phase", phase)
-                                                        .add( "latitude", latitude)
-                                                        .add( "longitude", longitude)
+                                                        .add( "socketype",evopodObj.get("socketype"))
+                                                        .add( "voltage",evopodObj.get("voltage"))
+                                                        .add( "amperage",evopodObj.get("amperage"))
+                                                        .add( "phase",evopodObj.get("phase"))
+                                                        .add( "latitude",evopodObj.get("latitude"))
+                                                        .add( "longitude",evopodObj.get("longitude"))
                                                         .build())
                                     .build())
                 .build();               
