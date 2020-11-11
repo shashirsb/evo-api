@@ -122,13 +122,15 @@ public class User  {
             // System.out.println(resultDoc.equals(null));
 
             if (resultDoc != null) {
+                System.out.println("1-------------------------");
                 JsonParser jParser=  Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
                 while(jParser.hasNext()){
                     jParser.next();
                     JsonObject jsonObject = jParser.getObject();
           
-       
+       System.out.println("2-------------------------");
         if(userid.equals(jsonObject.get("userid").toString())) {
+            System.out.println("3-------------------------");
         return JSON.createObjectBuilder()
                     .add( "userid", userid)
                     .add( "firstname", "samuel")
@@ -154,12 +156,12 @@ public class User  {
     }
 }
             }
-    
+            System.out.println("4-------------------------");
 
             } catch (Exception e) {
                e.printStackTrace();
             }
-
+            System.out.println("5-------------------------");
             return JSON.createObjectBuilder()
             .add( "userid", userid)
             .build();
