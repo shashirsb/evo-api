@@ -165,10 +165,12 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 String _document = "{\"userid\":\"" + userid + "\", \"password\":\"" + password + "\",\"mobile\":\"" + mobile + "\",\"firstname\":\"\",\"lastname\":\"\",\"customertype\":\"\",\"address\":\"\",\"evinfo\": {},\"evopod\": {}}";
 
 				// Create a JSON document.
-				OracleDocument doc = this.db.createDocumentFromString(_document);
+				OracleDocument doc = db.createDocumentFromString(_document);
 
 				// Insert the document into a collection.
-                OracleDocument newDoc = col.insertAndGet(doc);
+                col.insert(doc);
+
+                OracleDocument newDoc = col.find().filter(filterSpec).getOne();
                 //JSONObject jsonobject = new JSONObject(newDoc.getContentAsString());  
                 System.out.println("singup " + userid +" .... 200OK");
                 

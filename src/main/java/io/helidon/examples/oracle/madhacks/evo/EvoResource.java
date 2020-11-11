@@ -173,7 +173,7 @@ public class EvoResource {
         User user =new User();
         JsonObject loginUser = user.signUpUser(jsonObject.getString("userid"),jsonObject.getString("password"),jsonObject.getString("mobile"));
 
-        if (loginUser.getString("exists") == "true") {
+        if (loginUser.getString("exists").toString() == "true") {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
                     .add("singup", "declined")
