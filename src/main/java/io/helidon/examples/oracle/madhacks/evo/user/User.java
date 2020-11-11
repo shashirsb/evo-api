@@ -88,6 +88,7 @@ public class User  {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
     private static final JsonBuilderFactory evinfo = Json.createBuilderFactory(Collections.emptyMap());
+    private static final JsonBuilderFactory singupJSON = Json.createBuilderFactory(Collections.emptyMap());
 
 	public static EvoProvider asp = new EvoProvider("test");
 	public static OracleDatabase db = asp.dbConnect();
@@ -154,10 +155,11 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
             if (resultDoc != null) {
 
                 JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
-                jsonobject.createObjectBuilder()
+                singupJSON.createObjectBuilder()
                             .add("exists", true)
+                            .add("data", jsonobject)
                             .build();
-                return jsonobject;
+                return singupJSON;
 
             } else {
                 String _document = "{\"userid\":\"" + userid + "\", \"password\":\"" + password + "\",\"mobile\":\"" + mobile + "\",\"firstname\":\"\",\"lastname\":\"\",\"customertype\":\"\",\"address\":\"\",\"evinfo\": {},\"evopod\": {}}";
@@ -170,11 +172,12 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 JSONObject jsonobject = new JSONObject(newDoc.getContentAsString());  
                 System.out.println("singup " + userid +" .... 200OK");
                 
-                jsonobject.createObjectBuilder()
+                singupJSON.createObjectBuilder()
                             .add("exists", false)
+                            .add("data", jsonobject)
                             .build();
 
-                return jsonobject;
+                return singupJSON;
 
             }
 
