@@ -311,37 +311,23 @@ public JsonObject updateUser(JsonObject jsonObject) {
                 JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
-                JsonValue firstname = jsonObject.NULL;
-                JsonValue lastname =  jsonObject.NULL;
-                JsonValue customertype = jsonObject.NULL;
-                JsonValue mobile = jsonObject.NULL;
-                JsonValue address = jsonObject.NULL;
-                JsonValue model = jsonObject.NULL ;
-                JsonValue manufacturer = jsonObject.NULL;
-                JsonValue efficiency_kwh = jsonObject.NULL;
-                JsonValue efficiency_info = jsonObject.NULL;
-                JsonValue socketype = jsonObject.NULL;
-                JsonValue voltage = jsonObject.NULL;
-                JsonValue amperage = jsonObject.NULL;
-                JsonValue phase = jsonObject.NULL;
-                JsonValue latitude = jsonObject.NULL;
-                JsonValue longitude = jsonObject.NULL;
+                JsonValue firstname,lastname,customertype,mobile,address,model,manufacturer,efficiency_kwh,efficiency_info,socketype,voltage,amperage,phase,latitude,longitude = jsonObject.NULL;
 
                  firstname = jsonObject.isNull("firstname") ? jsonObject.NULL : jsonObject.get("firstname");
-                 lastname =  jsonObject.isNull("lastname") ? jsonObject.NULL : jsonObject.get("firstname");
-                 customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("firstname");
-                 mobile = jsonObject.isNull("mobile") ? jsonObject.NULL : jsonObject.get("firstname");
-                 address = jsonObject.isNull("address") ? jsonObject.NULL : jsonObject.get("firstname");
-                 model = evinfoObj.isNull("model") ? jsonObject.NULL : jsonObject.get("firstname");
-                 manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : jsonObject.get("firstname");
-                 efficiency_kwh = evinfoObj.isNull("efficiency_kwh") ? jsonObject.NULL : jsonObject.get("firstname");
-                 efficiency_info = evinfoObj.isNull("efficiency_info") ? jsonObject.NULL : jsonObject.get("firstname");
-                 socketype = evopodObj.isNull("socketype") ? jsonObject.NULL : jsonObject.get("firstname");
-                 voltage = evopodObj.isNull("voltage") ? jsonObject.NULL : jsonObject.get("firstname");
-                 amperage = evopodObj.isNull("amperage") ? jsonObject.NULL : jsonObject.get("firstname");
-                 phase = evopodObj.isNull("phase") ? jsonObject.NULL : jsonObject.get("firstname");
-                 latitude = evopodObj.isNull("latitude") ? jsonObject.NULL : jsonObject.get("firstname");
-                 longitude = evopodObj.isNull("longitude") ? jsonObject.NULL : jsonObject.get("firstname");
+                 lastname =  jsonObject.isNull("lastname") ? jsonObject.NULL : jsonObject.get("lastname");
+                 customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");
+                 mobile = jsonObject.isNull("mobile") ? jsonObject.NULL : jsonObject.get("mobile");
+                 address = jsonObject.isNull("address") ? jsonObject.NULL : jsonObject.get("address");
+                 model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
+                 manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
+                 efficiency_kwh = evinfoObj.isNull("efficiency_kwh") ? jsonObject.NULL : evinfoObj.get("efficiency_kwh");
+                 efficiency_info = evinfoObj.isNull("efficiency_info") ? jsonObject.NULL : evinfoObj.get("efficiency_info");
+                 socketype = evopodObj.isNull("socketype") ? jsonObject.NULL : evopodObj.get("socketype");
+                 voltage = evopodObj.isNull("voltage") ? jsonObject.NULL : evopodObj.get("voltage");
+                 amperage = evopodObj.isNull("amperage") ? jsonObject.NULL : evopodObj.get("amperage");
+                 phase = evopodObj.isNull("phase") ? jsonObject.NULL : evopodObj.get("phase");
+                 latitude = evopodObj.isNull("latitude") ? jsonObject.NULL : evopodObj.get("latitude");
+                 longitude = evopodObj.isNull("longitude") ? jsonObject.NULL : evopodObj.get("longitude");
 
                 return singupJSON.createObjectBuilder()
                 .add("exists", true)
