@@ -12,7 +12,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
  * Provider for greeting message.
  */
 @ApplicationScoped
-public class GreetingProvider {
+public class EvoProvider {
     private final AtomicReference<String> message = new AtomicReference<>();
 
     /**
@@ -21,7 +21,7 @@ public class GreetingProvider {
      * @param message greeting to use
      */
     @Inject
-    public GreetingProvider(@ConfigProperty(name = "app.greeting") String message) {
+    public EvoProvider(@ConfigProperty(name = "app.greeting") String message) {
         this.message.set(message);
     }
 

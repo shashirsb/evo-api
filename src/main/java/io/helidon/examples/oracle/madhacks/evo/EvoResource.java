@@ -41,7 +41,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
  */
 @Path("/evo")
 @RequestScoped
-public class GreetResource {
+public class EvoResource {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
     private static final JsonBuilderFactory evinfo = Json.createBuilderFactory(Collections.emptyMap());
@@ -49,17 +49,17 @@ public class GreetResource {
     /**
      * The greeting message provider.
      */
-    private final GreetingProvider greetingProvider;
+    private final EvoProvider evoProvider;
 
     /**
      * Using constructor injection to get a configuration property.
      * By default this gets the value from META-INF/microprofile-config
      *
-     * @param greetingConfig the configured greeting message
+     * @param evoConfig the configured greeting message
      */
     @Inject
-    public GreetResource(GreetingProvider greetingConfig) {
-        this.greetingProvider = greetingConfig;
+    public EvoResource(EvoProvider evoConfig) {
+        this.evoProvider = evoConfig;
     }
 
     /**
