@@ -154,10 +154,10 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
 
             if (resultDoc != null) {
 
-                JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
+                //JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
                 singupJSON.createObjectBuilder()
                             .add("exists", true)
-                            .add("data", jsonobject)
+                            .add("data",resultDoc.getContentAsString() )
                             .build();
                 return singupJSON;
 
@@ -169,12 +169,12 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
 
 				// Insert the document into a collection.
                 OracleDocument newDoc = col.insertAndGet(doc);
-                JSONObject jsonobject = new JSONObject(newDoc.getContentAsString());  
+                //JSONObject jsonobject = new JSONObject(newDoc.getContentAsString());  
                 System.out.println("singup " + userid +" .... 200OK");
                 
                 singupJSON.createObjectBuilder()
                             .add("exists", false)
-                            .add("data", jsonobject)
+                            .add("data", newDoc.getContentAsString())
                             .build();
 
                 return singupJSON;
