@@ -129,14 +129,14 @@ public class EvoResource {
         System.out.println("2-------------------------------");
        // System.out.println(singUpUser.getString("exists").toString());
 
-        if (signUpUser.get("exists").equal(true)) {
+        if (signUpUser.get("exists") == true) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
                     .add("signup", "declined")
                     .add("data", signUpUser.get("data"))
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
-        }  else if (signUpUser.get("exists").equal(false) && !signUpUser.containsKey("data")) {
+        }  else if (signUpUser.get("exists") == false && !signUpUser.containsKey("data")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "something went wrong")
                     .add("signup", "declined")
