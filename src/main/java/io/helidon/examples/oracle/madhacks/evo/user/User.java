@@ -155,11 +155,11 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
             if (resultDoc != null) {
 
                 //JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
-                singupJSON.createObjectBuilder()
-                            .add("exists", true)
-                            .add("data",resultDoc.getContentAsString() )
-                            .build();
-                return singupJSON;
+                
+                return singupJSON.createObjectBuilder()
+                                    .add("exists", true)
+                                    .add("data", resultDoc.getContentAsString())
+                                    .build();
 
             } else {
                 String _document = "{\"userid\":\"" + userid + "\", \"password\":\"" + password + "\",\"mobile\":\"" + mobile + "\",\"firstname\":\"\",\"lastname\":\"\",\"customertype\":\"\",\"address\":\"\",\"evinfo\": {},\"evopod\": {}}";
@@ -172,12 +172,12 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 //JSONObject jsonobject = new JSONObject(newDoc.getContentAsString());  
                 System.out.println("singup " + userid +" .... 200OK");
                 
-                singupJSON.createObjectBuilder()
-                            .add("exists", false)
-                            .add("data", newDoc.getContentAsString())
-                            .build();
+                
 
-                return singupJSON;
+                return singupJSON.createObjectBuilder()
+                                    .add("exists", false)
+                                    .add("data", newDoc.getContentAsString())
+                                    .build();
 
             }
 
