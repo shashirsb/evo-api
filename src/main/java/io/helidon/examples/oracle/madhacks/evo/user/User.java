@@ -69,7 +69,7 @@ import javax.json.JsonBuilderFactory;
 import javax.json.JsonObject;
 import javax.ws.rs.Consumes;
 
-import org.json.simple.parser.JSONParser;
+import javax.json.stream.JsonParser;
 
 import org.json.*; 
 
@@ -158,9 +158,9 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
 
                 //JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
                 System.out.println("User already exists successfully ---------------------");
-                JSONParser parser = new JSONParser();
-                Object obj = parser.parse(resultDoc.getContentAsString());
-				JSONObject jsonObject = (JSONObject) obj;
+
+                JsonParser jParser= Json.createParser(resultDoc.getContentAsString());
+				JSONObject jsonObject = jParser.getObject();
                 JSONObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
                 JSONObject evopodObj  = (JSONObject) jsonObject.get("evopod");
 
@@ -203,9 +203,9 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 System.out.println("Found one record successfully ---------------------");
                 System.out.println("singup " + newDoc.getContentAsString() +" .... 200OK");
                 
-                JSONParser parser = new JSONParser();
-                Object obj = parser.parse(newDoc.getContentAsString());
-				JSONObject jsonObject = (JSONObject) obj;
+                
+                JsonParser jParser= Json.createParser(resultDoc.getContentAsString());
+				JSONObject jsonObject = jParser.getObject();
                 JSONObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
                 JSONObject evopodObj  = (JSONObject) jsonObject.get("evopod");
 
