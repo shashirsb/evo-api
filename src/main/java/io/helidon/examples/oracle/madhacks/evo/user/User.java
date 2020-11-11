@@ -155,12 +155,14 @@ public class User  {
 }
             }
     
-    return JSON.createObjectBuilder()
-                .add( "userid", userid)
-                .build();
+
             } catch (Exception e) {
                e.printStackTrace();
             }
+
+            return JSON.createObjectBuilder()
+            .add( "userid", userid)
+            .build();
 }
 
 public JsonObject signUpUser(String userid,String password,String mobile) {
