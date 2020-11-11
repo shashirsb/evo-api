@@ -143,7 +143,7 @@ public class EvoResource {
         JsonObject authReponse = JSON.createObjectBuilder()
                     .add("signup", "success")
                     .add("info", "userid was created")
-                    .add("data", signUpUser.getString("data"))
+                    .add("data", signUpUser.get("data"))
                     .build();
 
         return Response.status(Response.Status.OK ).entity(authReponse).build();
