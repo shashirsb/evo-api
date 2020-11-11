@@ -90,7 +90,7 @@ public class User  {
 	public static OracleDatabase db = asp.dbConnect();
 
 	@Inject
-	void AtpSodaCartRepository() {
+	void User() {
 		try {
 			String UserResponse = createData();
 		} catch(Exception e) {
