@@ -99,7 +99,7 @@ public class EvoResource {
      * @return {@link JsonObject}
      */
     @SuppressWarnings("checkstyle:designforextension")
-    @Path("/singup")
+    @Path("/signup")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -121,18 +121,18 @@ public class EvoResource {
         }
 
         User user =new User();
-        JsonObject singUpUser = user.signUpUser(jsonObject.getString("userid"),jsonObject.getString("password"),jsonObject.getString("mobile"));
+        JsonObject signUpUser = user.signUpUser(jsonObject.getString("userid"),jsonObject.getString("password"),jsonObject.getString("mobile"));
 
-        System.out.println(singUpUser.getString("exists"));
+        System.out.println(signUpUser.getString("exists"));
        // System.out.println(singUpUser.getString("exists").toString());
 
-        if (singUpUser.getString("exists") == "true") {
+        if (signUpUser.getString("exists") == "true") {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
                     .add("singup", "declined")
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
-        }  else if (!singUpUser.containsKey("exists")) {
+        }  else if (signUpUser.getString("exists") == "false" && !signUpUser.containsKey("data")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "something went wrong")
                     .add("singup", "declined")
@@ -143,7 +143,7 @@ public class EvoResource {
         JsonObject authReponse = JSON.createObjectBuilder()
                     .add("singup", "success")
                     .add("info", "userid was created")
-                    .add("data", singUpUser.getString("data"))
+                    .add("data", signUpUser.getString("data"))
                     .build();
 
         return Response.status(Response.Status.OK ).entity(authReponse).build();
@@ -202,56 +202,7 @@ public class EvoResource {
       
     }
 
-       /**
-     * Return a greeting message using the name that was provided.
-     *
-     * @param name the name to greet
-     * @return {@link JsonObject}
-     */
-    @SuppressWarnings("checkstyle:designforextension")
-    @Path("/justme")
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @RequestBody(name = "userid",
-            required = true,
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
-    @APIResponses({
-            @APIResponse(name = "normal", responseCode = "204", description = "User login successfull!!"),
-            @APIResponse(name = "missing 'User'", responseCode = "400",
-                    description = "JSON did not contain setting for 'user'")})
-    public Response justme(JsonObject jsonObject) {
-            System.out.println("Inside login rest api");
-        if (!jsonObject.containsKey("userid")) {
-            JsonObject entity = JSON.createObjectBuilder()
-                    .add("error", "No userid provided")
-                    .build();
-            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
-        }
-
-        String _userid = jsonObject.getString("userid");
-        User user =new User();
-        JsonObject loginUser = user.findUser(_userid.toString());
-
-        if (!loginUser.containsKey("mobile")) {
-            JsonObject entity = JSON.createObjectBuilder()
-                    .add("authinfo", "userid does not exists")
-                    .add("auth", "declined")
-                    .build();
-            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
-        }
-
-        JsonObject authReponse = JSON.createObjectBuilder()
-                    .add("auth", "success")
-                    .add("authinfo", "userid was found")
-                    .add("data", loginUser)
-                    .build();
-
-        return Response.status(Response.Status.OK ).entity(authReponse).build();
-
-      
-    }
+    
 
 
     /**

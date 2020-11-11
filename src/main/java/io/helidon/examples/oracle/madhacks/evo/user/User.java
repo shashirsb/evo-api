@@ -155,7 +155,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
             if (resultDoc != null) {
 
                 //JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
-                
+                System.out.println("User already exists successfully ---------------------");
                 return singupJSON.createObjectBuilder()
                                     .add("exists", true)
                                     .add("data", resultDoc.getContentAsString())
@@ -169,10 +169,10 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
 
 				// Insert the document into a collection.
                 col.insert(doc);
-
+                System.out.println("Inserted successfully ---------------------");
                 OracleDocument newDoc = col.find().filter(filterSpec).getOne();
-                //JSONObject jsonobject = new JSONObject(newDoc.getContentAsString());  
-                System.out.println("singup " + userid +" .... 200OK");
+                System.out.println("Found one record successfully ---------------------");
+                System.out.println("singup " + newDoc.getContentAsString() +" .... 200OK");
                 
                 
 
@@ -189,6 +189,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
 
 return JSON.createObjectBuilder()
             .add( "userid", userid)
+            .add("exists", false)
             .build();
 }
 	
