@@ -136,7 +136,7 @@ public class EvoResource {
                     .add("data", loginUser)
                     .build();
 
-        return Response.status(Response.Status.BAD_REQUEST).entity(authReponse).build();
+        return Response.status(Response.Status.SUCCESSFUL ).entity(authReponse).build();
 
       
     }

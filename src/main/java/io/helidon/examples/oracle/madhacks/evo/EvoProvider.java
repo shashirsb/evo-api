@@ -96,7 +96,7 @@ public class EvoProvider {
             /**
              * Connect to ATP and verify database connectivity
              */
-            System.out.println("\n**checking DB catalog");
+            System.out.println("\n**checking DB ATP SODA");
 
             // load password from file in wallet location
             StringBuilder contentBuilder = new StringBuilder();
