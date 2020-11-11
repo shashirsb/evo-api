@@ -107,7 +107,28 @@ public class User  {
 	}
 
     public JsonObject findUser(String userid) {
-        if(userid.equals("shashi")) {
+        try {
+            OracleCollection col = this.db.admin().createCollection("users");
+            // Find all documents in the collection.
+            OracleDocument oraDoc,
+            resultDoc = null;
+            String jsonFormattedString = null;
+
+            OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : \"" + userid + "\"}");
+            System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
+
+            resultDoc = col.find().filter(filterSpec).getOne();
+            // System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
+            // System.out.println(resultDoc.equals(null));
+
+            if (resultDoc != null) {
+                JsonParser jParser=  Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
+                while(jParser.hasNext()){
+                    jParser.next();
+                    JsonObject jsonObject = jParser.getObject();
+          
+       
+        if(userid.equals(jsonObject.get("userid").toString())) {
         return JSON.createObjectBuilder()
                     .add( "userid", userid)
                     .add( "firstname", "samuel")
@@ -131,9 +152,15 @@ public class User  {
                                         .build())
                     .build();
     }
+}
+            }
+    
     return JSON.createObjectBuilder()
                 .add( "userid", userid)
                 .build();
+            } catch (Exception e) {
+               e.printStackTrace();
+            }
 }
 
 public JsonObject signUpUser(String userid,String password,String mobile) {
