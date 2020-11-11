@@ -159,7 +159,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 //JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
                 System.out.println("User already exists successfully ---------------------");
 
-                JsonParser jParser= Json.createParser(resultDoc.getContentAsString());
+                JsonParser jParser= Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
 				JSONObject jsonObject = jParser.getObject();
                 JSONObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
                 JSONObject evopodObj  = (JSONObject) jsonObject.get("evopod");
@@ -204,7 +204,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 System.out.println("singup " + newDoc.getContentAsString() +" .... 200OK");
                 
                 
-                JsonParser jParser= Json.createParser(resultDoc.getContentAsString());
+                JsonParser jParser=  Json.createParser(new ByteArrayInputStream(newDoc.getContentAsString().getBytes()));
 				JSONObject jsonObject = jParser.getObject();
                 JSONObject evinfoObj  = (JSONObject) jsonObject.get("evinfo");
                 JSONObject evopodObj  = (JSONObject) jsonObject.get("evopod");
