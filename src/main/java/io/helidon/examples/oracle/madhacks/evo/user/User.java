@@ -131,7 +131,8 @@ public class User  {
        System.out.println("2-------------------------");
        System.out.println(jsonObject.get("userid").toString());
        System.out.println(jsonObject.get("userid"));
-        if(userid.equals(jsonObject.get("userid").toString())) {
+       System.out.println(userid);
+        if(userid.equals(jsonObject.get("userid"))) {
             System.out.println("3-------------------------");
         return JSON.createObjectBuilder()
                     .add( "userid", userid)
