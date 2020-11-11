@@ -111,7 +111,7 @@ public class EvoResource {
             @APIResponse(name = "missing 'User'", responseCode = "400",
                     description = "JSON did not contain setting for 'user'")})
     public Response authUser(JsonObject jsonObject) {
-
+System.out.println("Inside login rest api");
         if (!jsonObject.containsKey("userid")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("error", "No userid provided")
@@ -160,7 +160,7 @@ public class EvoResource {
             @APIResponse(name = "missing 'User'", responseCode = "400",
                     description = "JSON did not contain setting for 'user'")})
     public Response singUpUser(JsonObject jsonObject) {
-
+        System.out.println("Inside signup rest api");
         if (!jsonObject.containsKey("userid") || !jsonObject.containsKey("password") || !jsonObject.containsKey("mobile")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("error", "No userid provided")
