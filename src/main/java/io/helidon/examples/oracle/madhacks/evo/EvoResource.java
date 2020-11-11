@@ -124,22 +124,23 @@ public class EvoResource {
         JsonObject signUpUser = user.signUpUser(jsonObject.getString("userid"),jsonObject.getString("password"),jsonObject.getString("mobile"));
 
         System.out.println(signUpUser.toString());
+        System.out.println(signUpUser.get("exists").toString());
        // System.out.println(singUpUser.getString("exists").toString());
 
-        if (signUpUser.get("exists").toString() == "true") {
+        if (signUpUser.get("exists").equal(true)) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
                     .add("signup", "declined")
                     .add("data", signUpUser.get("data"))
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
-        }  else if (signUpUser.get("exists").toString() == "false" && !signUpUser.containsKey("data")) {
+        }  else if (signUpUser.get("exists").equal(false) && !signUpUser.containsKey("data")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "something went wrong")
                     .add("signup", "declined")
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
-        }
+        } 
 
         JsonObject authReponse = JSON.createObjectBuilder()
                     .add("signup", "success")
