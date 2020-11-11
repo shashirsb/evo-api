@@ -126,7 +126,7 @@ public class EvoResource {
         System.out.println(signUpUser.toString());
        // System.out.println(singUpUser.getString("exists").toString());
 
-        if (signUpUser.getString("exists") == "true") {
+        if (signUpUser.get("exists").toString() == "true") {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "userid already exists")
                     .add("signup", "declined")

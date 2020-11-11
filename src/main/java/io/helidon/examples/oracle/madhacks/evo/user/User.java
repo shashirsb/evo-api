@@ -195,10 +195,32 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 }
 
             } else {
-                String _document = "{\"userid\":\"" + userid + "\", \"password\":\"" + password + "\",\"mobile\":\"" + mobile + "\",\"firstname\":\"\",\"lastname\":\"\",\"customertype\":\"\",\"address\":\"\",\"evinfo\": {},\"evopod\": {}}";
+                //String _document = "{\"userid\":\"" + userid + "\", \"password\":\"" + password + "\",\"mobile\":\"" + mobile + "\",\"firstname\":\"\",\"lastname\":\"\",\"customertype\":\"\",\"address\":\"\",\"evinfo\": {},\"evopod\": {}}";
 
+                JsonObjeft docObject = JSON.createObjectBuilder()
+                .add( "userid", userid)
+                .add( "firstname",  password )
+                .add( "lastname",  "")
+                .add( "customertype",  "")
+                .add( "mobile",  mobile)
+                .add( "address",  "")
+                .add( "evinfo", JSON.createObjectBuilder()
+                                    .add( "model", "")
+                                    .add( "manufacturer", "")
+                                    .add( "efficiency_kwh", "")
+                                    .add( "efficiency_info", "")
+                                    .build())
+                .add( "evopod", JSON.createObjectBuilder()
+                                    .add( "socketype", "")
+                                    .add( "voltage", "")
+                                    .add( "amperage", "")
+                                    .add( "phase", "")
+                                    .add( "latitude", "")
+                                    .add( "longitude", "")
+                                    .build())
+                .build();
 				// Create a JSON document.
-				OracleDocument doc = db.createDocumentFromString(_document);
+				OracleDocument doc = db.createDocumentFromString(docObject.toString());
 
 				// Insert the document into a collection.
                 col.insert(doc);
