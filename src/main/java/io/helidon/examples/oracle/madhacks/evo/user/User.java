@@ -129,11 +129,11 @@ public class User  {
                     JsonObject jsonObject = jParser.getObject();
           
        System.out.println("2-------------------------");
-       System.out.println(jsonObject.get("userid").toString());
+       System.out.println(jsonObject.getString("userid").toString());
        System.out.println(jsonObject.get("userid"));
        System.out.println(userid + "");
        System.out.println(userid.toString());
-        if(userid.toString().equals(jsonObject.get("userid").toString())) {
+        if(userid.equals(jsonObject.getString("userid"))) {
             System.out.println("3-------------------------");
         return JSON.createObjectBuilder()
                     .add( "userid", userid)
