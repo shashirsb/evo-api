@@ -129,6 +129,8 @@ public class User  {
                     JsonObject jsonObject = jParser.getObject();
           
        System.out.println("2-------------------------");
+       System.out.println(jsonObject.get("userid").toString());
+       System.out.println(jsonObject.get("userid"));
         if(userid.equals(jsonObject.get("userid").toString())) {
             System.out.println("3-------------------------");
         return JSON.createObjectBuilder()
