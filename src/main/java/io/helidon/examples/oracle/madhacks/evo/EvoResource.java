@@ -25,6 +25,8 @@ import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
+import io.helidon.examples.oracle.madhacks.evo.*;
+
 /**
  * A simple JAX-RS resource to greet you. Examples:
  *
@@ -45,6 +47,8 @@ public class EvoResource {
 
     private static final JsonBuilderFactory JSON = Json.createBuilderFactory(Collections.emptyMap());
     private static final JsonBuilderFactory evinfo = Json.createBuilderFactory(Collections.emptyMap());
+
+    private static final User user =new User();
 
     /**
      * The greeting message provider.
@@ -117,7 +121,7 @@ public class EvoResource {
         }
 
         String _userid = jsonObject.getString("userid");
-        JsonObject loginUser =  findUser(_userid.toString());
+        JsonObject loginUser = user.findUser(_userid.toString());
 
         if (!loginUser.containsKey("firstname")) {
             JsonObject entity = JSON.createObjectBuilder()
@@ -179,36 +183,5 @@ public class EvoResource {
                 .add("message", msg)
                 .build();
     }
-
-    private JsonObject findUser(String userid) {
-
-        if(userid.equals("shashi")) {
-        return JSON.createObjectBuilder()
-                    .add( "userid", userid)
-                    .add( "firstname", "samuel")
-                    .add( "lastname", "varthaman")
-                    .add( "customertype", "ev")
-                    .add( "mobile", "randy")
-                    .add( "address", "myaddress")
-                    .add( "evinfo", JSON.createObjectBuilder()
-                                        .add( "model", "randy")
-                                        .add( "manufacturer", "randy")
-                                        .add( "efficiency_kwh", "10.2")
-                                        .add( "efficiency_info", "10.2 kWh/100 km")
-                                        .build())
-                    .add( "evopod", JSON.createObjectBuilder()
-                                        .add( "socketype", "230V, 16A")
-                                        .add( "voltage", "230 V")
-                                        .add( "amperage", "16 A")
-                                        .add( "phase", "1-phase")
-                                        .add( "latitude", "12.9200782")
-                                        .add( "longitude", "77.5307203")
-                                        .build())
-                    .build();
-    }
-
-    return JSON.createObjectBuilder()
-                .add( "userid", userid)
-                .build();
-}
+    
 }
