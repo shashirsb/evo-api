@@ -344,7 +344,7 @@ public JsonObject updateUser(JsonObject jsonObject) {
         }
 
 return JSON.createObjectBuilder()
-            .add( "userid", userid)
+            .add( "userid", jsonObject.get("userid"))
             .add("exists", false)
             .build();
 }
