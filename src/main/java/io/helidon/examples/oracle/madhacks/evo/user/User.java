@@ -156,10 +156,36 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
 
                 //JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
                 System.out.println("User already exists successfully ---------------------");
+                Object obj = parser.parse(resultDoc.getContentAsString());
+				JSONObject jsonObject = (JSONObject) obj;
+                JSONObject evinfoObj = jsonObject.get("evinfo");
+                JSONObject evopodObj = jsonObject.get("evopod");
+
                 return singupJSON.createObjectBuilder()
-                                    .add("exists", true)
-                                    .add("data", resultDoc.getContentAsString())
-                                    .build();
+                .add("exists", false)
+                .add("data", JSON.createObjectBuilder()
+                                    .add( "userid", jsonObject.get("userid").toString())
+                                    .add( "firstname",  jsonObject.get("firstname").toString())
+                                    .add( "lastname",  jsonObject.get("lastname").toString())
+                                    .add( "customertype",  jsonObject.get("customertype").toString())
+                                    .add( "mobile",  jsonObject.get("mobile").toString())
+                                    .add( "address",  jsonObject.get("address").toString())
+                                    .add( "evinfo", JSON.createObjectBuilder()
+                                                        .add( "model", evinfoObj.get("model").toString())
+                                                        .add( "manufacturer", evinfoObj.get("manufacturer").toString())
+                                                        .add( "efficiency_kwh", evinfoObj.get("efficiency_kwh").toString())
+                                                        .add( "efficiency_info", evinfoObj.get("efficiency_info").toString())
+                                                        .build())
+                                    .add( "evopod", JSON.createObjectBuilder()
+                                                        .add( "socketype", evopodObj.get("socketype").toString())
+                                                        .add( "voltage", evopodObj.get("voltage").toString())
+                                                        .add( "amperage", evopodObj.get("amperage").toString())
+                                                        .add( "phase", evopodObj.get("phase").toString())
+                                                        .add( "latitude", evopodObj.get("latitude").toString())
+                                                        .add( "longitude", evopodObj.get("longitude").toString())
+                                                        .build())
+                                    .build())
+                .build();
 
             } else {
                 String _document = "{\"userid\":\"" + userid + "\", \"password\":\"" + password + "\",\"mobile\":\"" + mobile + "\",\"firstname\":\"\",\"lastname\":\"\",\"customertype\":\"\",\"address\":\"\",\"evinfo\": {},\"evopod\": {}}";
@@ -174,11 +200,35 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 System.out.println("Found one record successfully ---------------------");
                 System.out.println("singup " + newDoc.getContentAsString() +" .... 200OK");
                 
-                
+                Object obj = parser.parse(newDoc.getContentAsString());
+				JSONObject jsonObject = (JSONObject) obj;
+                JSONObject evinfoObj = jsonObject.get("evinfo");
+                JSONObject evopodObj = jsonObject.get("evopod");
 
                 return singupJSON.createObjectBuilder()
                                     .add("exists", false)
-                                    .add("data", newDoc.getContentAsString())
+                                    .add("data", JSON.createObjectBuilder()
+                                                        .add( "userid", jsonObject.get("userid").toString())
+                                                        .add( "firstname",  jsonObject.get("firstname").toString())
+                                                        .add( "lastname",  jsonObject.get("lastname").toString())
+                                                        .add( "customertype",  jsonObject.get("customertype").toString())
+                                                        .add( "mobile",  jsonObject.get("mobile").toString())
+                                                        .add( "address",  jsonObject.get("address").toString())
+                                                        .add( "evinfo", JSON.createObjectBuilder()
+                                                                            .add( "model", evinfoObj.get("model").toString())
+                                                                            .add( "manufacturer", evinfoObj.get("manufacturer").toString())
+                                                                            .add( "efficiency_kwh", evinfoObj.get("efficiency_kwh").toString())
+                                                                            .add( "efficiency_info", evinfoObj.get("efficiency_info").toString())
+                                                                            .build())
+                                                        .add( "evopod", JSON.createObjectBuilder()
+                                                                            .add( "socketype", evopodObj.get("socketype").toString())
+                                                                            .add( "voltage", evopodObj.get("voltage").toString())
+                                                                            .add( "amperage", evopodObj.get("amperage").toString())
+                                                                            .add( "phase", evopodObj.get("phase").toString())
+                                                                            .add( "latitude", evopodObj.get("latitude").toString())
+                                                                            .add( "longitude", evopodObj.get("longitude").toString())
+                                                                            .build())
+                                                        .build())
                                     .build();
 
             }
