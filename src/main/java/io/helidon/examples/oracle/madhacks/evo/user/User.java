@@ -412,8 +412,9 @@ public JsonObject updateUser(JsonObject jsonObject) {
                                 OracleDocument doc = db.createDocumentFromString(docObject.toString());
 
                                 // Insert the document into a collection.
+                                col.find().filter(filterSpec).remove();
                                 col.insert(doc);
-                                System.out.println("Inserted successfully ---------------------");
+                                System.out.println("Updated successfully ---------------------");
 
 
                 return singupJSON.createObjectBuilder()
