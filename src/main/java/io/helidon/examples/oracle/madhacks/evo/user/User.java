@@ -151,6 +151,9 @@ public class User  {
                  latitude = evopodObj.isNull("latitude") ? jsonObject.NULL : evopodObj.get("latitude");
                  longitude = evopodObj.isNull("longitude") ? jsonObject.NULL : evopodObj.get("longitude");
 
+               
+
+
                 return singupJSON.createObjectBuilder()
                 .add("exists", true)
                 .add("data", JSON.createObjectBuilder()
@@ -382,6 +385,36 @@ public JsonObject updateUser(JsonObject jsonObject) {
                  phase = evopodObj.isNull("phase") ? jsonObject.NULL : evopodObj.get("phase");
                  latitude = evopodObj.isNull("latitude") ? jsonObject.NULL : evopodObj.get("latitude");
                  longitude = evopodObj.isNull("longitude") ? jsonObject.NULL : evopodObj.get("longitude");
+
+                 JsonObject docObject = JSON.createObjectBuilder()
+                                                .add( "userid", jsonObject.get("userid"))
+                                                .add( "firstname",  firstname)
+                                                .add( "lastname",  lastname)
+                                                .add( "customertype",  customertype)
+                                                .add( "mobile", mobile )
+                                                .add( "address", address)
+                                                .add( "evinfo", JSON.createObjectBuilder()
+                                                                    .add( "model",model )
+                                                                    .add( "manufacturer",manufacturer )
+                                                                    .add( "efficiency_kwh",efficiency_kwh )
+                                                                    .add( "efficiency_info", efficiency_info )
+                                                                    .build())
+                                                .add( "evopod", JSON.createObjectBuilder()
+                                                                    .add( "socketype",socketype )
+                                                                    .add( "voltage", voltage)
+                                                                    .add( "amperage",amperage )
+                                                                    .add( "phase", phase)
+                                                                    .add( "latitude", latitude)
+                                                                    .add( "longitude", longitude)
+                                                                    .build())
+                                                .build();
+                                // Create a JSON document.
+                                OracleDocument doc = db.createDocumentFromString(docObject.toString());
+
+                                // Insert the document into a collection.
+                                col.insert(doc);
+                                System.out.println("Inserted successfully ---------------------");
+
 
                 return singupJSON.createObjectBuilder()
                 .add("exists", true)
