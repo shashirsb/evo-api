@@ -1,0 +1,54 @@
+Functionality: Login User
+REST API: http://193.122.183.22/evo/updateUser
+Method: POST
+Body: {
+    "userid": "sssa",
+    "password":"",
+    "firstname": "test123",
+    "lastname": "",
+    "customertype": "evinfo",
+    "mobile": "87878787",
+    "address": "",
+    "evinfo": {
+        "model": "randy",
+        "manufacturer": "randy",
+        "efficiency_kwh": "10.2",
+        "efficiency_info": "10.2 kWh/100 km"
+    },
+    "evopod": {
+            "socketype": "",
+            "voltage": "",
+            "amperage": "",
+            "phase": "",
+            "latitude": "",
+            "longitude": ""
+        }
+}
+
+====
+Response Body: {
+    "info": "userid already exists",
+    "update": "success",
+    "data": {
+        "userid": "sssa",
+        "firstname": "test123",
+        "lastname": "",
+        "customertype": "evinfo",
+        "mobile": "87878787",
+        "address": "",
+        "evinfo": {
+            "model": "randy",
+            "manufacturer": "randy",
+            "efficiency_kwh": "10.2",
+            "efficiency_info": "10.2 kWh/100 km"
+        },
+        "evopod": {
+            "socketype": "",
+            "voltage": "",
+            "amperage": "",
+            "phase": "",
+            "latitude": "",
+            "longitude": ""
+        }
+    }
+}

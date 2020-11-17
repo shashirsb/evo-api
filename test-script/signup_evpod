@@ -1,0 +1,54 @@
+Functionality: Login User
+REST API: http://193.122.183.22/evo/updateUser
+Method: POST
+Body: {
+    "userid": "sssa",
+    "password":"",
+    "firstname": "test123",
+    "lastname": "",
+    "customertype": "evopod",
+    "mobile": "87878787",
+    "address": "",
+    "evinfo": {
+        "model": "",
+        "manufacturer": "",
+        "efficiency_kwh": "",
+        "efficiency_info": ""
+    },
+    "evopod": {
+            "socketype": "230V, 16A",
+            "voltage": "230 V",
+            "amperage": "16 A",
+            "phase": "1-phase",
+            "latitude": "12.9200782",
+            "longitude": "77.5307203"
+        }
+}
+
+====
+Response Body: {
+    "info": "userid already exists",
+    "update": "success",
+    "data": {
+        "userid": "sssa",
+        "firstname": "test123",
+        "lastname": "",
+        "customertype": "evopod",
+        "mobile": "87878787",
+        "address": "",
+        "evinfo": {
+            "model": "",
+            "manufacturer": "",
+            "efficiency_kwh": "",
+            "efficiency_info": ""
+        },
+        "evopod": {
+            "socketype": "230V, 16A",
+            "voltage": "230 V",
+            "amperage": "16 A",
+            "phase": "1-phase",
+            "latitude": "12.9200782",
+            "longitude": "77.5307203"
+        }
+    }
+}
