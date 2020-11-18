@@ -327,24 +327,16 @@ public class EvoResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @RequestBody(name = "userid",
-            required = true,
-            content = @Content(mediaType = "application/json",
-                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
+    @RequestBody(required = true,
+            content = @Content(mediaType = "application/json"))
     @APIResponses({
-            @APIResponse(name = "normal", responseCode = "204", description = "User login successfull!!"),
+            @APIResponse(name = "normal", responseCode = "204", description = "Pods found!!"),
             @APIResponse(name = "missing 'User'", responseCode = "400",
-                    description = "JSON did not contain setting for 'user'")})
+                    description = "JSON did not contain setting for 'pods'")})
     public Response findPods(JsonObject jsonObject) {
-            System.out.println("Inside login rest api");
-        if (!jsonObject.containsKey("userid")) {
-            JsonObject entity = JSON.createObjectBuilder()
-                    .add("error", "No userid provided")
-                    .build();
-            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
-        }
+            System.out.println("Inside Pods rest api");
 
-        String _userid = jsonObject.getString("userid");
+
         Pods pods =new Pods();
         JsonObject podsResult = pods.findPods(jsonObject.getString("filter"),jsonObject.getString("current"),jsonObject.getString("desired"),jsonObject.getString("latitude"),jsonObject.getString("longitude"));
 
