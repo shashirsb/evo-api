@@ -136,23 +136,23 @@ public class Dashboard  {
                 JsonValue _customertype,_model,_manufacturer,_batterylevel,_discharge,_range = jsonObject.NULL;
 
                  
-                 customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");                 
-                 model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
-                 manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
-                 batterylevel = "0%";
-                 discharge = "26.71 kWh/100 miles";
-                 range = "0 miles";     
+                _customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");                 
+                 _model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
+                 _manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
+                 _batterylevel = "0%";
+                 _discharge = "26.71 kWh/100 miles";
+                 _range = "0 miles";     
 
 
                 return singupJSON.createObjectBuilder()
                 .add("data", JSON.createObjectBuilder()
                                     .add( "userid", jsonObject.get("userid"))
-                                    .add( "customertype",  customertype)
-                                    .add( "model", model )
-                                    .add( "manufacturer", manufacturer)
-                                    .add( "batterylevel", batterylevel)
-                                    .add( "discharge", discharge)
-                                    .add( "range", range)
+                                    .add( "customertype",  _customertype)
+                                    .add( "model", _model )
+                                    .add( "manufacturer", _manufacturer)
+                                    .add( "batterylevel", _batterylevel)
+                                    .add( "discharge", _discharge)
+                                    .add( "range", _range)
                                     .build())
                 .build();      
     }
