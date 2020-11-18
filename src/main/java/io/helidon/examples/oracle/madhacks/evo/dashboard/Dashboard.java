@@ -133,16 +133,29 @@ public class Dashboard  {
                 JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
-                JsonValue _customertype,_model,_manufacturer,_batterylevel,_discharge,_range = jsonObject.NULL;
+                JsonValue _customertype,_model,_manufacturer,_socketype,_voltage,_amperage,_phase = jsonObject.NULL;
 
                  
                  _customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");                 
                  _model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
                  _manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
-                //  _batterylevel = (JSONObject) parser.parse("0%");
-                //  _discharge = (JSONObject) parser.parse("26.71 kWh/100 miles");
-                //  _range = (JSONObject) parser.parse("0 miles");     
+                 _socketype = evopodObj.isNull("socketype") ? jsonObject.NULL : evopodObj.get("socketype");
+                 _voltage = evopodObj.isNull("voltage") ? jsonObject.NULL : evopodObj.get("voltage");
+                 _amperage = evopodObj.isNull("amperage") ? jsonObject.NULL : evopodObj.get("amperage");
+                 _phase = evopodObj.isNull("phase") ? jsonObject.NULL : evopodObj.get("phase");
 
+                String _batterylevel = "0%";
+                String _discharge = "26.71 kWh/100 miles";
+                String _range = "0 miles";   
+                
+                String _lastPayment = "300";
+                String _totalPayment = "12342";
+                String _lastUnitCharge = "2.71 kWh";
+                String _totalUnitCharge = "12.71 kWh";   
+                String _lastChargingTime = "1h 21min";   
+                String _totalChargingTime = "19h 37min";   
+
+                if(customertype.equals("evinfo")) {
 
                 return singupJSON.createObjectBuilder()
                 .add("data", JSON.createObjectBuilder()
@@ -150,11 +163,32 @@ public class Dashboard  {
                                     .add( "customertype",  _customertype)
                                     .add( "model", _model )
                                     .add( "manufacturer", _manufacturer)
-                                    .add( "batterylevel", "0%")
-                                    .add( "discharge", "26.71 kWh/100 miles")
-                                    .add( "range", "0 miles")
+                                    .add( "batterylevel", _batterylevel)
+                                    .add( "discharge", _discharge)
+                                    .add( "range", _range)
                                     .build())
                 .build();      
+                }
+
+                if(customertype.equals("evopod")) {
+
+                    return singupJSON.createObjectBuilder()
+                    .add("data", JSON.createObjectBuilder()
+                                        .add( "userid", jsonObject.get("userid"))
+                                        .add( "customertype",  _customertype)
+                                        .add( "socketype", _socketype)
+                                        .add( "voltage", _voltage)
+                                        .add( "amperage", _amperage)
+                                        .add( "phase", _phase)
+                                        .add( "lastPayment", _lastPayment)
+                                        .add( "totalPayment", _totalPayment)
+                                        .add( "lastUnitCharge", _lastUnitCharge)
+                                        .add( "totalUnitCharge", _totalUnitCharge)
+                                        .add( "lastChargingTime", _lastChargingTime)
+                                        .add( "totalChargingTime", _totalChargingTime)
+                                        .build())
+                    .build();      
+                    }
     }
 }
             }
