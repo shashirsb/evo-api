@@ -1,12 +1,54 @@
 API Development
-1. sign up api
-2. login api
-3. sign up api for ev and evpod
-4. ev owner - dashboard
-5. evpod owner - dashboard
+1. sign up api - done
+2. login api - done
+3. sign up api for ev and evpod - done
+4. ev owner - dashboard - done
+5. evpod owner - dashboard - done
+
 6. search result 
 7. book evpod 
+
 8. charging - api
 9. Cost and charges - api
 10. Payment - api
 
+
+Dummy dataset api
+=================
+
+
+
+
+  JsonValue firstname = jsonObject.NULL;
+                JsonValue lastname =  jsonObject.NULL;
+                JsonValue customertype = jsonObject.NULL;
+                JsonValue mobile = jsonObject.NULL;
+                JsonValue address = jsonObject.NULL;
+                JsonValue model = jsonObject.NULL ;
+                JsonValue manufacturer = jsonObject.NULL;
+                JsonValue efficiency_kwh = jsonObject.NULL;
+                JsonValue efficiency_info = jsonObject.NULL;
+                JsonValue socketype = jsonObject.NULL;
+                JsonValue voltage = jsonObject.NULL;
+                JsonValue amperage = jsonObject.NULL;
+                JsonValue phase = jsonObject.NULL;
+                JsonValue latitude = jsonObject.NULL;
+                JsonValue longitude = jsonObject.NULL;
+				
+				
+				
+                JsonValue firstname = jsonObject.NULL : jsonObject.get("firstname");
+                JsonValue lastname =  jsonObject.NULL : jsonObject.get("lastname");
+                JsonValue customertype = jsonObject.NULL  : jsonObject.get("customertype");
+                JsonValue mobile = jsonObject.NULL  : jsonObject.get("mobile");
+                JsonValue address = jsonObject.NULL  : jsonObject.get("address");
+                JsonValue model = jsonObject.NULL  : evinfoObj.get("model");
+                JsonValue manufacturer = jsonObject.NULL  : evinfoObj.get("manufacturer");
+                JsonValue efficiency_kwh = jsonObject.NULL  : evinfoObj.get("efficiency_kwh");
+                JsonValue efficiency_info = jsonObject.NULL  : evinfoObj.get("efficiency_info");
+                JsonValue socketype = jsonObject.NULL  : evopodObj.get("socketype");
+                JsonValue voltage = jsonObject.NULL  : evopodObj.get("voltage");
+                JsonValue amperage = jsonObject.NULL  : evopodObj.get("amperage");
+                JsonValue phase = jsonObject.NULL  : evopodObj.get("phase");
+                JsonValue latitude = jsonObject.NULL  : evopodObj.get("latitude");
+                JsonValue longitude = sonObject.NULL  : evopodObj.get("longitude");

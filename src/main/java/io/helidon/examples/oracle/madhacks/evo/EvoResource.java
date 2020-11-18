@@ -316,6 +316,56 @@ public class EvoResource {
       
     }
 
+         /**
+     * Return a greeting message using the name that was provided.
+     *
+     * @param name the name to greet
+     * @return {@link JsonObject}
+     */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Path("/findpods")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequestBody(name = "userid",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
+    @APIResponses({
+            @APIResponse(name = "normal", responseCode = "204", description = "User login successfull!!"),
+            @APIResponse(name = "missing 'User'", responseCode = "400",
+                    description = "JSON did not contain setting for 'user'")})
+    public Response findPods(JsonObject jsonObject) {
+            System.out.println("Inside login rest api");
+        if (!jsonObject.containsKey("userid")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("error", "No userid provided")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        String _userid = jsonObject.getString("userid");
+        Pods pods =new Pods();
+        JsonObject podsResult = pods.findPods(jsonObject.getString("filter"),jsonObject.getString("current"),jsonObject.getString("desired"),jsonObject.getString("latitude"),jsonObject.getString("longitude"));
+
+        System.out.println(podsResult.toString());
+        if (!podsResult.containsKey("data")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("info", "declined")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        JsonObject podsResultReponse = JSON.createObjectBuilder()
+                    .add("info", "success")
+                    .add("data", podsResult)
+                    .build();
+
+        return Response.status(Response.Status.OK ).entity(podsResultReponse).build();
+
+      
+    }
+
     
 
 
