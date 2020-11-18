@@ -336,7 +336,6 @@ public class EvoResource {
     public Response findPods(JsonObject jsonObject) {
             System.out.println("Inside Pods rest api");
 
-
         Pods pods =new Pods();
         JsonObject podsResult = pods.findPods(jsonObject.getString("filter"),jsonObject.getString("current"),jsonObject.getString("desired"),jsonObject.getString("latitude"),jsonObject.getString("longitude"));
 
