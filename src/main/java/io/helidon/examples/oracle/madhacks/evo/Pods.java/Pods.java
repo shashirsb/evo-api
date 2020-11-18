@@ -114,7 +114,7 @@ public class Pods  {
             resultDoc = null;
             String jsonFormattedString = null;
 
-            OracleDocument filterSpec = this.db.createDocumentFromString("{\"socketype\" : {\"$not\" : {\"$eq\" : \"\"}}}");
+            OracleDocument filterSpec = db.createDocumentFromString("{\"socketype\" : {\"$not\" : {\"$eq\" : \"\"}}}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
             resultDoc = col.find().filter(filterSpec).getOne();
@@ -131,7 +131,7 @@ public class Pods  {
                     JsonObject jsonObject = jParser.getObject();
     
             System.out.println("3-------------------------");
-        JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
+                JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
                 JsonValue firstname,lastname,customertype,mobile,address,model,manufacturer,efficiency_kwh,efficiency_info,socketype,voltage,amperage,phase,latitude,longitude = jsonObject.NULL;
