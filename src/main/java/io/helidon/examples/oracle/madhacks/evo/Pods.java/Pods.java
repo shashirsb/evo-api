@@ -114,10 +114,9 @@ public class Pods  {
             resultDoc = null;
             String jsonFormattedString = null;
 
-            OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : \"" + userid + "\"}");
-            System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
-            resultDoc = col.find().filter(filterSpec).getOne();
+
+            resultDoc = col.find().getOne();
              System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
             // System.out.println(resultDoc.equals(null));
 

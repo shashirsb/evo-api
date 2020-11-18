@@ -346,7 +346,7 @@ public class EvoResource {
 
         String _userid = jsonObject.getString("userid");
         Pods pods =new Pods();
-        JsonObject podsResult = pods.findPods(jsonObject.getString("userid"),jsonObject.getString("filter"),jsonObject.getString("current"),jsonObject.getString("desired"),jsonObject.getString("latitude"),jsonObject.getString("longitude"));
+        JsonObject podsResult = pods.findPods(jsonObject.getString("filter"),jsonObject.getString("current"),jsonObject.getString("desired"),jsonObject.getString("latitude"),jsonObject.getString("longitude"));
 
         System.out.println(podsResult.toString());
         if (!podsResult.containsKey("data")) {
