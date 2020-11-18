@@ -132,7 +132,6 @@ public class Dashboard  {
             System.out.println("3-------------------------");
                 JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
-                JSONParser parser = new JSONParser();
 
                 JsonValue _customertype,_model,_manufacturer,_batterylevel,_discharge,_range = jsonObject.NULL;
 
@@ -140,9 +139,9 @@ public class Dashboard  {
                  _customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");                 
                  _model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
                  _manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
-                 _batterylevel = (JSONObject) parser.parse("0%");
-                 _discharge = (JSONObject) parser.parse("26.71 kWh/100 miles");
-                 _range = (JSONObject) parser.parse("0 miles");     
+                //  _batterylevel = (JSONObject) parser.parse("0%");
+                //  _discharge = (JSONObject) parser.parse("26.71 kWh/100 miles");
+                //  _range = (JSONObject) parser.parse("0 miles");     
 
 
                 return singupJSON.createObjectBuilder()
@@ -151,9 +150,9 @@ public class Dashboard  {
                                     .add( "customertype",  _customertype)
                                     .add( "model", _model )
                                     .add( "manufacturer", _manufacturer)
-                                    .add( "batterylevel", _batterylevel)
-                                    .add( "discharge", _discharge)
-                                    .add( "range", _range)
+                                    .add( "batterylevel", "0%")
+                                    .add( "discharge", "26.71 kWh/100 miles")
+                                    .add( "range", "0 miles")
                                     .build())
                 .build();      
     }
