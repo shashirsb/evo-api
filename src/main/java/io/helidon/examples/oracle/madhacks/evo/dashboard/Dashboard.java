@@ -139,9 +139,9 @@ public class Dashboard  {
                 _customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");                 
                  _model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
                  _manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
-                 _batterylevel = "0%";
-                 _discharge = "26.71 kWh/100 miles";
-                 _range = "0 miles";     
+                 _batterylevel = (JSONObject) parser.parse("0%");
+                 _discharge = (JSONObject) parser.parse("26.71 kWh/100 miles");
+                 _range = (JSONObject) parser.parse("0 miles");     
 
 
                 return singupJSON.createObjectBuilder()

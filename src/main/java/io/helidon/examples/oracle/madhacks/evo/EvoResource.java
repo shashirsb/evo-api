@@ -28,7 +28,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 
 import io.helidon.examples.oracle.madhacks.evo.*;
 // import io.helidon.examples.oracle.madhacks.evo.User;
-import io.helidon.examples.oracle.madhacks.evo.dashboard.Dashboard;
+//import io.helidon.examples.oracle.madhacks.evo.dashboard.Dashboard;
 
 /**
  * A simple JAX-RS resource to greet you. Examples:
