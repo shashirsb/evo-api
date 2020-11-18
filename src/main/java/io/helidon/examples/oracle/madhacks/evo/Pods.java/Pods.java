@@ -114,7 +114,7 @@ public class Pods  {
             resultDoc = null;
             String jsonFormattedString = null;
 
-            OracleDocument filterSpec = db.createDocumentFromString("{\"evopod\": {\"phase\" : {\"$not\" : {\"$eq\" : \"\"}}}}");
+            OracleDocument filterSpec = db.createDocumentFromString("{\"evopod\": {\"$not\" : {\"$eq\" : {}}}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
             resultDoc = col.find().filter(filterSpec).getOne();
