@@ -126,8 +126,7 @@ public class Pods  {
                 while(jParser.hasNext()){
                     jParser.next();
                     JsonObject jsonObject = jParser.getObject();
-          
-        if(userid.equals(jsonObject.getString("userid"))) {
+    
             System.out.println("3-------------------------");
         JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
@@ -180,7 +179,7 @@ public class Pods  {
                 .build();      
     }
 }
-            }
+            
             System.out.println("4-------------------------");
 
             } catch (Exception e) {
