@@ -130,13 +130,14 @@ public class Dashboard  {
           
         if(userid.equals(jsonObject.getString("userid"))) {
             System.out.println("3-------------------------");
-        JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
+                JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
+                JSONParser parser = new JSONParser();
 
                 JsonValue _customertype,_model,_manufacturer,_batterylevel,_discharge,_range = jsonObject.NULL;
 
                  
-                _customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");                 
+                 _customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");                 
                  _model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
                  _manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
                  _batterylevel = (JSONObject) parser.parse("0%");
