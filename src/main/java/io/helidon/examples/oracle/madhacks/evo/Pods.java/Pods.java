@@ -114,7 +114,7 @@ public class Pods  {
             resultDoc = null;
             String jsonFormattedString = null;
 
-            OracleDocument filterSpec = db.createDocumentFromString("{\"phase\" : {\"$not\" : {\"$eq\" : }}}");
+            OracleDocument filterSpec = db.createDocumentFromString("{\"evopod\":{\"phase\" : {\"$not\" : {\"$eq\" : \"\"}}}}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
             resultDoc = col.find().filter(filterSpec).getOne();
@@ -150,9 +150,7 @@ public class Pods  {
                  amperage = evopodObj.isNull("amperage") ? jsonObject.NULL : evopodObj.get("amperage");
                  phase = evopodObj.isNull("phase") ? jsonObject.NULL : evopodObj.get("phase");
                  latitude = evopodObj.isNull("latitude") ? jsonObject.NULL : evopodObj.get("latitude");
-                 longitude = evopodObj.isNull("longitude") ? jsonObject.NULL : evopodObj.get("longitude");
-
-               
+                 longitude = evopodObj.isNull("longitude") ? jsonObject.NULL : evopodObj.get("longitude");               
 
 
                 return singupJSON.createObjectBuilder()
