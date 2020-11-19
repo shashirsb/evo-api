@@ -108,8 +108,8 @@ public class Calculator  {
             OracleDocument oraDoc,
             resultDoc = null;
             String jsonFormattedString = null;
-            Float powersupplierrate = 10;
-            Float govttax = 15;
+            Float powersupplierrate = Float.parseFloat("10");
+            Float govttax = Float.parseFloat("15");
             OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : \"" + podownerid + "\"}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
