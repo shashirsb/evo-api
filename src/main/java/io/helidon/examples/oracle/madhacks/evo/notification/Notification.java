@@ -66,7 +66,9 @@ import oracle.soda.OracleException;
 
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.json.JsonArray;
 import javax.json.JsonValue;
 import javax.ws.rs.Consumes;
 
@@ -518,7 +520,7 @@ public JsonArray findNotification(JsonObject jsonObject) {
             JsonParser jParser=  Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
             while(jParser.hasNext()){
                 jParser.next();
-                JsonObject jsonObject = jParser.getObject();
+                jsonObject = jParser.getObject();
 
         System.out.println("3-------------------------");
 
