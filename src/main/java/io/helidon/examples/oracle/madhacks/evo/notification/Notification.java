@@ -429,7 +429,7 @@ public JsonObject notificationBroker(JsonObject jsonObject) {
                 .build();
 
             }
-            if(jsonObject.getString("action").equals("decline")) {
+            if(jsonObject.getString("action").equals("declined")) {
                 
                 JsonValue userid = jsonObject.get("userid");
                 JsonValue touserid = jsonObject.get("touserid");
