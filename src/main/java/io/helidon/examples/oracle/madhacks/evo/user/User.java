@@ -133,7 +133,7 @@ public class User  {
         JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
-                JsonValue firstname,lastname,customertype,mobile,address,model,manufacturer,efficiency_kwh,efficiency_info,socketype,voltage,amperage,phase,latitude,longitude = jsonObject.NULL;
+                JsonValue firstname,lastname,customertype,mobile,address,chargeamount,chargeamountcurrency,model,manufacturer,efficiency_kwh,efficiency_info,socketype,voltage,amperage,phase,latitude,longitude = jsonObject.NULL;
 
                  firstname = jsonObject.isNull("firstname") ? jsonObject.NULL : jsonObject.get("firstname");
                  lastname =  jsonObject.isNull("lastname") ? jsonObject.NULL : jsonObject.get("lastname");
@@ -239,7 +239,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                                     .add( "customertype",  jsonObject.get("customertype"))
                                     .add( "mobile",  jsonObject.get("mobile"))
                                     .add( "address",  jsonObject.get("address"))
-                                    .add( "chargeamount", 0)
+                                    .add( "chargeamount", 10)
                                     .add( "chargeamountcurrency", "$")
                                     .add( "evinfo", JSON.createObjectBuilder()
                                                         .add( "model", "")
@@ -269,7 +269,7 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 .add( "customertype",  "")
                 .add( "mobile",  mobile)
                 .add( "address",  "")
-                .add( "chargeamount", 0)
+                .add( "chargeamount", 10)
                 .add( "chargeamountcurrency", "$")
                 .add( "evinfo", JSON.createObjectBuilder()
                                     .add( "model", "")
@@ -378,7 +378,7 @@ public JsonObject updateUser(JsonObject jsonObject) {
                 JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
                 JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
-                JsonValue firstname,lastname,customertype,mobile,address,model,manufacturer,efficiency_kwh,efficiency_info,socketype,voltage,amperage,phase,latitude,longitude = jsonObject.NULL;
+                JsonValue firstname,lastname,customertype,mobile,address,chargeamount,chargeamountcurrency,model,manufacturer,efficiency_kwh,efficiency_info,socketype,voltage,amperage,phase,latitude,longitude = jsonObject.NULL;
 
                  firstname = jsonObject.isNull("firstname") ? jsonObject.NULL : jsonObject.get("firstname");
                  lastname =  jsonObject.isNull("lastname") ? jsonObject.NULL : jsonObject.get("lastname");

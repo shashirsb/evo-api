@@ -113,7 +113,7 @@ public class Calculator  {
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
             resultDoc = col.find().filter(filterSpec).getOne();
-             System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
+            System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
             // System.out.println(resultDoc.equals(null));
 
             if (resultDoc != null) {
@@ -123,67 +123,37 @@ public class Calculator  {
                     jParser.next();
                     JsonObject jsonObject = jParser.getObject();
           
-        if(userid.equals(jsonObject.getString("userid"))) {
+        if(podownerid.equals(jsonObject.getString("podownerid"))) {
             System.out.println("3-------------------------");
-                JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
-                JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
 
-                JsonValue _customertype,_model,_manufacturer,_socketype,_voltage,_amperage,_phase = jsonObject.NULL;
+
+                JsonValue chargeamount = jsonObject.NULL;
 
                  
-                 _customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");                 
-                 _model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
-                 _manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
-                 _socketype = evopodObj.isNull("socketype") ? jsonObject.NULL : evopodObj.get("socketype");
-                 _voltage = evopodObj.isNull("voltage") ? jsonObject.NULL : evopodObj.get("voltage");
-                 _amperage = evopodObj.isNull("amperage") ? jsonObject.NULL : evopodObj.get("amperage");
-                 _phase = evopodObj.isNull("phase") ? jsonObject.NULL : evopodObj.get("phase");
+                chargeamount = jsonObject.isNull("chargeamount") ? jsonObject.NULL : jsonObject.get("chargeamount"); 
+                chargeamountcurrency = jsonObject.isNull("chargeamountcurrency") ? jsonObject.NULL : jsonObject.get("chargeamountcurrency");                
 
-                String _batterylevel = "0%";
-                String _discharge = "26.71 kWh/100 miles";
-                String _range = "0 miles";   
-                
-                String _lastPayment = "300";
-                String _totalPayment = "12342";
-                String _lastUnitCharge = "2.71 kWh";
-                String _totalUnitCharge = "12.71 kWh";   
-                String _lastChargingTime = "1h 21min";   
-                String _totalChargingTime = "19h 37min";   
 
-                if(customertype.equals("evinfo")) {
+                Integer pricePerkWh = jsonObject.get("chargeamount");
+                Float chargingCosts = ((Float.parseFloat(consumedpowerinwatts) * Float.parseFloat(consumedpowerinhours))/1000) * pricePerkWh;
+                  
+
+  
 
                 return singupJSON.createObjectBuilder()
                 .add("data", JSON.createObjectBuilder()
                                     .add( "userid", jsonObject.get("userid"))
-                                    .add( "customertype",  _customertype)
-                                    .add( "model", _model )
-                                    .add( "manufacturer", _manufacturer)
-                                    .add( "batterylevel", _batterylevel)
-                                    .add( "discharge", _discharge)
-                                    .add( "range", _range)
+                                    .add( "podownerid",  podownerid)
+                                    .add( "consumedpowerinwatts", consumedpowerinwatts )
+                                    .add( "consumedpowerinhours", consumedpowerinhours)
+                                    .add( "pricePerkWh", pricePerkWh)
+                                    .add( "chargingCosts", chargingCosts)
+                                    .add( "chargeamountcurrency", chargeamountcurrency)
                                     .build())
                 .build();      
-                }
+                
 
-                if(customertype.equals("evopod")) {
 
-                    return singupJSON.createObjectBuilder()
-                    .add("data", JSON.createObjectBuilder()
-                                        .add( "userid", jsonObject.get("userid"))
-                                        .add( "customertype",  _customertype)
-                                        .add( "socketype", _socketype)
-                                        .add( "voltage", _voltage)
-                                        .add( "amperage", _amperage)
-                                        .add( "phase", _phase)
-                                        .add( "lastPayment", _lastPayment)
-                                        .add( "totalPayment", _totalPayment)
-                                        .add( "lastUnitCharge", _lastUnitCharge)
-                                        .add( "totalUnitCharge", _totalUnitCharge)
-                                        .add( "lastChargingTime", _lastChargingTime)
-                                        .add( "totalChargingTime", _totalChargingTime)
-                                        .build())
-                    .build();      
-                    }
     }
 }
             }

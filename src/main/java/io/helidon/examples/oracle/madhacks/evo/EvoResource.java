@@ -427,10 +427,10 @@ public class EvoResource {
 
         String _userid = jsonObject.getString("userid");
         Calculator calculator =new Calculator();
-        JsonObject dashboardUser = calculator.findChargeCost(jsonObject.getString("userid"),jsonObject.getString("podownerid"),jsonObject.getString("consumedpowerinwatts"),jsonObject.getString("consumedpowerinhours"));
+        JsonObject calculatorResult = calculator.findChargeCost(jsonObject.getString("userid"),jsonObject.getString("podownerid"),jsonObject.getString("consumedpowerinwatts"),jsonObject.getString("consumedpowerinhours"));
 
-        System.out.println(dashboardUser.toString());
-        if (!dashboardUser.containsKey("data")) {
+        System.out.println(calculatorResult.toString());
+        if (!calculatorResult.containsKey("data")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "declined")
                     .build();
@@ -439,7 +439,7 @@ public class EvoResource {
 
         JsonObject dashboardReponse = JSON.createObjectBuilder()
                     .add("info", "success")
-                    .add("data", dashboardUser)
+                    .add("data", calculatorResult)
                     .build();
 
         return Response.status(Response.Status.OK ).entity(dashboardReponse).build();
