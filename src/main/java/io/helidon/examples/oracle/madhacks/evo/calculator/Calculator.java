@@ -127,11 +127,11 @@ public class Calculator  {
             System.out.println("3-------------------------");
 
 
-                JsonValue chargeamount,chargeamountcurrency = jsonObject.NULL;
+                JsonValue chargeamount,currency = jsonObject.NULL;
 
                  
                 chargeamount = jsonObject.isNull("chargeamount") ? jsonObject.NULL : jsonObject.get("chargeamount"); 
-                chargeamountcurrency = jsonObject.isNull("chargeamountcurrency") ? jsonObject.NULL : jsonObject.get("chargeamountcurrency");                
+                currency = jsonObject.isNull("currency") ? jsonObject.NULL : jsonObject.get("currency");                
 
 
                 Integer pricePerkWh = Integer.parseInt(jsonObject.get("chargeamount").toString());
@@ -148,7 +148,7 @@ public class Calculator  {
                                     .add( "consumedpowerinhours", consumedpowerinhours)
                                     .add( "pricePerkWh", pricePerkWh)
                                     .add( "chargingCosts", chargingCosts)
-                                    .add( "chargeamountcurrency", chargeamountcurrency)
+                                    .add( "currency", currency)
                                     .build())
                 .build();      
                 
