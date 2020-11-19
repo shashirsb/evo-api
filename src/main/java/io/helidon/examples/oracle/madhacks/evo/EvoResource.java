@@ -445,5 +445,55 @@ public class EvoResource {
         return Response.status(Response.Status.OK ).entity(dashboardReponse).build();
       
     }
+
+    
+        /**
+     * Return a greeting message using the name that was provided.
+     *
+     * @param name the name to greet
+     * @return {@link JsonObject}
+     */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Path("/pay")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequestBody(name = "userid",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
+    @APIResponses({
+            @APIResponse(name = "normal", responseCode = "204", description = "Calculation done successfull!!"),
+            @APIResponse(name = "missing 'User'", responseCode = "400",
+                    description = "JSON did not contain setting for 'user'")})
+    public Response payments(JsonObject jsonObject) {
+            System.out.println("Inside costcalculator rest api");
+        if (!jsonObject.containsKey("userid")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("error", "No userid provided")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        String _userid = jsonObject.getString("userid");
+        Payment payment =new Payment();
+        JsonObject paymentResult = payment.paymentGateway(jsonObject.getString("userid"),jsonObject.getString("podownerid"),jsonObject.get("chargingCosts"),jsonObject.get("powersuppliercosts"),jsonObject.get("govttaxcost"),jsonObject.get("totalcost"),jsonObject.getString("currency"),jsonObject.getString("paymentmode"));
+
+        System.out.println(paymentResult.toString());
+        if (!paymentResult.containsKey("data")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("info", "declined")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        JsonObject paymentReponse = JSON.createObjectBuilder()
+                    .add("info", "success")
+                    .add("data", paymentResult)
+                    .build();
+
+        return Response.status(Response.Status.OK ).entity(paymentReponse).build();
+      
+    }
     
 }
