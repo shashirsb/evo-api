@@ -467,7 +467,7 @@ public class EvoResource {
             @APIResponse(name = "missing 'User'", responseCode = "400",
                     description = "JSON did not contain setting for 'user'")})
     public Response payments(JsonObject jsonObject) {
-            System.out.println("Inside costcalculator rest api");
+            System.out.println("Inside pay rest api");
         if (!jsonObject.containsKey("userid")) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("error", "No userid provided")
