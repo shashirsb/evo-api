@@ -525,12 +525,12 @@ public JsonArray findNotification(JsonObject jsonObject) {
         System.out.println("3-------------------------");
 
 
-            JsonValue userid = jsonObject.isNull("userid") ? jsonObject.NULL : jsonObject.get("userid");
-            JsonValue touserid = jsonObject.isNull("touserid") ? jsonObject.NULL : jsonObject.get("touserid");
-            JsonValue customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");
-            JsonValue action = jsonObject.isNull("action") ? jsonObject.NULL : jsonObject.get("action");
-            JsonValue message = jsonObject.isNull("message") ? jsonObject.NULL : jsonObject.get("message");
-            JsonValue status = jsonObject.isNull("status") ? jsonObject.NULL : jsonObject.get("status");
+            JsonValue _userid = jsonObject.isNull("userid") ? jsonObject.NULL : jsonObject.get("userid");
+            JsonValue _touserid = jsonObject.isNull("touserid") ? jsonObject.NULL : jsonObject.get("touserid");
+            JsonValue _customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");
+            JsonValue _action = jsonObject.isNull("action") ? jsonObject.NULL : jsonObject.get("action");
+            JsonValue _message = jsonObject.isNull("message") ? jsonObject.NULL : jsonObject.get("message");
+            JsonValue _status = jsonObject.isNull("status") ? jsonObject.NULL : jsonObject.get("status");
             
 
 
@@ -539,12 +539,12 @@ public JsonArray findNotification(JsonObject jsonObject) {
              builder.add(singupJSON.createObjectBuilder()
             .add("exists", true)
             .add("data", JSON.createObjectBuilder()
-                                .add( "userid", jsonObject.get("userid"))
-                                .add( "touserid",  touserid)
-                                .add( "customertype",  customertype)
-                                .add( "action",  action)
-                                .add( "message", message )
-                                .add( "status", status)
+                                .add( "userid", _userid)
+                                .add( "touserid",  _touserid)
+                                .add( "customertype",  _customertype)
+                                .add( "action",  _action)
+                                .add( "message", _message )
+                                .add( "status", _status)
                                 .build())
             .build()   
              );
