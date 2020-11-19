@@ -127,14 +127,14 @@ public class Calculator  {
             System.out.println("3-------------------------");
 
 
-                JsonValue chargeamount = jsonObject.NULL;
+                JsonValue chargeamount,chargeamountcurrency = jsonObject.NULL;
 
                  
                 chargeamount = jsonObject.isNull("chargeamount") ? jsonObject.NULL : jsonObject.get("chargeamount"); 
                 chargeamountcurrency = jsonObject.isNull("chargeamountcurrency") ? jsonObject.NULL : jsonObject.get("chargeamountcurrency");                
 
 
-                Integer pricePerkWh = jsonObject.get("chargeamount");
+                Integer pricePerkWh = Integer.parseInt(jsonObject.get("chargeamount").toString());
                 Float chargingCosts = ((Float.parseFloat(consumedpowerinwatts) * Float.parseFloat(consumedpowerinhours))/1000) * pricePerkWh;
                   
 
