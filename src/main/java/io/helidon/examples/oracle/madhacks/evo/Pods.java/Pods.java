@@ -122,7 +122,7 @@ public class Pods  {
 
             //resultDoc = col.find().filter(filterSpec).getOne();
 
-            OracleCursor c = col.find().filter(filterSpec);
+            OracleCursor c = col.find().filter(filterSpec).getCursor();
 
             while (c.hasNext()) {
                 resultDoc = c.next();
