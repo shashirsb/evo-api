@@ -101,7 +101,7 @@ public class Calculator  {
 		}
 	}
 
-    public JsonObject findChargeCost(String userid, String podownerid, String consumedpowerinwatts, String consumedpowerinhours) {
+    public JsonObject findChargeCost(String userid, String podownerid, JsonValue consumedpowerinwatts, JsonValue consumedpowerinhours) {
         try {
             OracleCollection col = this.db.admin().createCollection("charges");
             // Find all documents in the collection.
