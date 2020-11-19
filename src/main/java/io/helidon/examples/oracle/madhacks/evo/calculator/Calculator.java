@@ -135,7 +135,7 @@ public class Calculator  {
 
 
                 Integer pricePerkWh = Integer.parseInt(jsonObject.get("chargeamount").toString());
-                Float chargingCosts = ((Float.parseFloat(consumedpowerinwatts) * Float.parseFloat(consumedpowerinhours))/1000) * pricePerkWh;
+                Float chargingCosts = ((Float.parseFloat(consumedpowerinwatts.toString()) * Float.parseFloat(consumedpowerinhours.toString()))/1000) * pricePerkWh;
                   
 
   
