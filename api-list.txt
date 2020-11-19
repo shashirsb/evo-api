@@ -5,12 +5,13 @@ API Development
 4. ev owner - dashboard - done
 5. evpod owner - dashboard - done
 6. search result - done
-
 7. book evpod api
-8. charging api
-
-9. Cost and charges api
-10. Payment api
+	setNotification
+	acceptNotification
+	declineNotification
+	getNotification   
+8. Cost and charges api- done
+9. Payment api - done 
 
 
 Dummy dataset api

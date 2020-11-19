@@ -30,6 +30,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import io.helidon.examples.oracle.madhacks.evo.*;
 // import io.helidon.examples.oracle.madhacks.evo.User;
 //import io.helidon.examples.oracle.madhacks.evo.dashboard.Dashboard;
+import io.helidon.examples.oracle.madhacks.evo.notification.Notification;
 
 /**
  * A simple JAX-RS resource to greet you. Examples:
@@ -495,5 +496,54 @@ public class EvoResource {
         return Response.status(Response.Status.OK ).entity(paymentReponse).build();
       
     }
+
+       /**
+     * Return a greeting message using the name that was provided.
+     *
+     * @param name the name to greet
+     * @return {@link JsonObject}
+     */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Path("/notification")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequestBody(name = "userid",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
+    @APIResponses({
+            @APIResponse(name = "normal", responseCode = "204", description = "Calculation done successfull!!"),
+            @APIResponse(name = "missing 'User'", responseCode = "400",
+                    description = "JSON did not contain setting for 'user'")})
+    public Response notification(JsonObject jsonObject) {
+            System.out.println("Inside notification rest api");
+        if (!jsonObject.containsKey("userid")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("error", "No userid provided")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        Notification notification =new Notification();
+        JsonObject notificationResult = notification.notificationBroker(jsonObject);
+
+        System.out.println(notificationResult.toString());
+        if (!notificationResult.containsKey("data")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("info", "declined")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        JsonObject notificationReponse = JSON.createObjectBuilder()
+                    .add("info", "success")
+                    .add("data", notificationResult)
+                    .build();
+
+        return Response.status(Response.Status.OK ).entity(notificationReponse).build();
+      
+    }
+
     
 }
