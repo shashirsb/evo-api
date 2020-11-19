@@ -4,13 +4,13 @@ API Development
 3. sign up api for ev and evpod - done
 4. ev owner - dashboard - done
 5. evpod owner - dashboard - done
+6. search result - done
 
-6. search result 
-7. book evpod 
+7. book evpod api
+8. charging api
 
-8. charging - api
-9. Cost and charges - api
-10. Payment - api
+9. Cost and charges api
+10. Payment api
 
 
 Dummy dataset api

@@ -347,15 +347,11 @@ public class EvoResource {
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         }
-
         JsonObject podsResultReponse = JSON.createObjectBuilder()
                     .add("info", "success")
                     .add("data", podsResult)
                     .build();
-
-        return Response.status(Response.Status.OK ).entity(podsResultReponse).build();
-
-      
+        return Response.status(Response.Status.OK ).entity(podsResultReponse).build();      
     }
 
     
@@ -388,19 +384,66 @@ public class EvoResource {
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         }
-
         String newGreeting = jsonObject.getString("greeting");
-
         evoProvider.setMessage(newGreeting);
         return Response.status(Response.Status.NO_CONTENT).build();
     }
 
     private JsonObject createResponse(String who) {
         String msg = String.format("%s %s!", evoProvider.getMessage(), who);
-
         return JSON.createObjectBuilder()
                 .add("message", msg)
                 .build();
+    }
+
+
+        /**
+     * Return a greeting message using the name that was provided.
+     *
+     * @param name the name to greet
+     * @return {@link JsonObject}
+     */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Path("/costcalculator")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequestBody(name = "userid",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
+    @APIResponses({
+            @APIResponse(name = "normal", responseCode = "204", description = "Calculation done successfull!!"),
+            @APIResponse(name = "missing 'User'", responseCode = "400",
+                    description = "JSON did not contain setting for 'user'")})
+    public Response costCalculator(JsonObject jsonObject) {
+            System.out.println("Inside costcalculator rest api");
+        if (!jsonObject.containsKey("userid")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("error", "No userid provided")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        String _userid = jsonObject.getString("userid");
+        Calculator calculator =new Calculator();
+        JsonObject dashboardUser = calculator.findChargeCost(jsonObject.getString("userid"),jsonObject.getString("podownerid"),jsonObject.getString("consumedpowerinwatts"),jsonObject.getString("consumedpowerinhours"));
+
+        System.out.println(dashboardUser.toString());
+        if (!dashboardUser.containsKey("data")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("info", "declined")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        JsonObject dashboardReponse = JSON.createObjectBuilder()
+                    .add("info", "success")
+                    .add("data", dashboardUser)
+                    .build();
+
+        return Response.status(Response.Status.OK ).entity(dashboardReponse).build();
+      
     }
     
 }

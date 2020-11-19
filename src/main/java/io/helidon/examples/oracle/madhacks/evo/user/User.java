@@ -140,6 +140,8 @@ public class User  {
                  customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");
                  mobile = jsonObject.isNull("mobile") ? jsonObject.NULL : jsonObject.get("mobile");
                  address = jsonObject.isNull("address") ? jsonObject.NULL : jsonObject.get("address");
+                 chargeamount = jsonObject.isNull("chargeamount") ? jsonObject.NULL : jsonObject.get("chargeamount");
+                 chargeamountcurrency = jsonObject.isNull("chargeamountcurrency") ? jsonObject.NULL : jsonObject.get("chargeamountcurrency");
                  model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
                  manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
                  efficiency_kwh = evinfoObj.isNull("efficiency_kwh") ? jsonObject.NULL : evinfoObj.get("efficiency_kwh");
@@ -163,6 +165,8 @@ public class User  {
                                     .add( "customertype",  customertype)
                                     .add( "mobile", mobile )
                                     .add( "address", address)
+                                    .add( "chargeamount", chargeamount)
+                                    .add( "chargeamountcurrency", chargeamountcurrency)
                                     .add( "evinfo", JSON.createObjectBuilder()
                                                         .add( "model",model )
                                                         .add( "manufacturer",manufacturer )
@@ -235,6 +239,8 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                                     .add( "customertype",  jsonObject.get("customertype"))
                                     .add( "mobile",  jsonObject.get("mobile"))
                                     .add( "address",  jsonObject.get("address"))
+                                    .add( "chargeamount", 0)
+                                    .add( "chargeamountcurrency", "$")
                                     .add( "evinfo", JSON.createObjectBuilder()
                                                         .add( "model", "")
                                                         .add( "manufacturer", "")
@@ -263,6 +269,8 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                 .add( "customertype",  "")
                 .add( "mobile",  mobile)
                 .add( "address",  "")
+                .add( "chargeamount", 0)
+                .add( "chargeamountcurrency", "$")
                 .add( "evinfo", JSON.createObjectBuilder()
                                     .add( "model", "")
                                     .add( "manufacturer", "")
@@ -305,6 +313,8 @@ public JsonObject signUpUser(String userid,String password,String mobile) {
                                                         .add( "customertype",  jsonObject.get("customertype"))
                                                         .add( "mobile",  jsonObject.get("mobile"))
                                                         .add( "address",  jsonObject.get("address"))
+                                                        .add( "chargeamount", jsonObject.get("chargeamount"))
+                                                        .add( "chargeamountcurrency", jsonObject.get("chargeamountcurrency"))
                                                         .add( "evinfo", JSON.createObjectBuilder()
                                                                                 .add( "model", "")
                                                                                 .add( "manufacturer", "")
@@ -375,6 +385,8 @@ public JsonObject updateUser(JsonObject jsonObject) {
                  customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");
                  mobile = jsonObject.isNull("mobile") ? jsonObject.NULL : jsonObject.get("mobile");
                  address = jsonObject.isNull("address") ? jsonObject.NULL : jsonObject.get("address");
+                 chargeamount = jsonObject.isNull("chargeamount") ? jsonObject.NULL : jsonObject.get("chargeamount");
+                 chargeamountcurrency = jsonObject.isNull("chargeamountcurrency") ? jsonObject.NULL : jsonObject.get("chargeamountcurrency");
                  model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
                  manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
                  efficiency_kwh = evinfoObj.isNull("efficiency_kwh") ? jsonObject.NULL : evinfoObj.get("efficiency_kwh");
@@ -393,6 +405,8 @@ public JsonObject updateUser(JsonObject jsonObject) {
                                                 .add( "customertype",  customertype)
                                                 .add( "mobile", mobile )
                                                 .add( "address", address)
+                                                .add( "chargeamount", chargeamount)
+                                                .add( "chargeamountcurrency", chargeamountcurrency)
                                                 .add( "evinfo", JSON.createObjectBuilder()
                                                                     .add( "model",model )
                                                                     .add( "manufacturer",manufacturer )
@@ -426,6 +440,8 @@ public JsonObject updateUser(JsonObject jsonObject) {
                                     .add( "customertype",  customertype)
                                     .add( "mobile", mobile )
                                     .add( "address", address)
+                                    .add( "chargeamount", chargeamount)
+                                    .add( "chargeamountcurrency", chargeamountcurrency)
                                     .add( "evinfo", JSON.createObjectBuilder()
                                                         .add( "model",model )
                                                         .add( "manufacturer",manufacturer )
