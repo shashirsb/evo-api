@@ -103,7 +103,7 @@ public class Calculator  {
 
     public JsonObject findChargeCost(String userid, String podownerid, JsonValue consumedpowerinwatts, JsonValue consumedpowerinhours) {
         try {
-            OracleCollection col = this.db.admin().createCollection("users");
+            OracleCollection col = db.admin().createCollection("users");
             // Find all documents in the collection.
             OracleDocument oraDoc,
             resultDoc = null;
@@ -141,7 +141,29 @@ public class Calculator  {
                 Float powersuppliercosts = chargingCosts * (powersupplierrate/100);
                 Float govttaxcost = chargingCosts * (govttax/100);
                 Float totalcost = chargingCosts * (1 + ((powersupplierrate + govttax)/100));
-  
+
+                JsonObject docObject = JSON.createObjectBuilder()
+                .add( "userid", userid)
+                .add( "podownerid",  podownerid)
+                .add( "consumedpowerinwatts", consumedpowerinwatts )
+                .add( "consumedpowerinhours", consumedpowerinhours)
+                .add( "priceperkwh", pricePerkWh)
+                .add( "chargingcosts", chargingCosts)
+                .add( "currency", currency)
+                .add( "powersupplierrate", powersupplierrate +"%")
+                .add( "powersuppliercosts", powersuppliercosts)
+                .add( "govttax", govttax +"%")
+                .add( "govttaxcost", govttaxcost)
+                .add( "totalcost", totalcost)
+                .build();
+
+                // Create a JSON document.
+                col = db.admin().createCollection("charges");
+				OracleDocument doc = db.createDocumentFromString(docObject.toString());
+
+				// Insert the document into a collection.
+                col.insert(doc);
+                System.out.println("Inserted successfully ---------------------");
 
                 return singupJSON.createObjectBuilder()
                 .add("data", JSON.createObjectBuilder()
@@ -160,6 +182,9 @@ public class Calculator  {
                                     .build())
                 .build();      
                 
+
+                
+
 
 
     }
