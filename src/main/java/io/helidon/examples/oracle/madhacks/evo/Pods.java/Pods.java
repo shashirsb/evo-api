@@ -114,7 +114,7 @@ public class Pods  {
             resultDoc = null;
             String jsonFormattedString = null;
 
-            OracleDocument filterSpec = db.createDocumentFromString("{ \"$and\" : [ {\"evopod\": {\"amperage\": {\"$not\" : {\"$eq\" : \"\"}}}},{\"evopod\": {\"$not\" : {\"$eq\" : {}}}}]}");
+            OracleDocument filterSpec = db.createDocumentFromString("{ \"$and\" : [ {\"evopod\": {\"amperage\": {\"$not\" : {\"$eq\" : \"\"}}}},{\"evopod\": {\"$not\" : {}}}]}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
             resultDoc = col.find().filter(filterSpec).getOne();
