@@ -477,7 +477,7 @@ public class EvoResource {
 
         String _userid = jsonObject.getString("userid");
         Payment payment =new Payment();
-        JsonObject paymentResult = payment.paymentGateway(jsonObject.getString("userid"),jsonObject.getString("podownerid"),jsonObject.get("chargingCosts"),jsonObject.get("powersuppliercosts"),jsonObject.get("govttaxcost"),jsonObject.get("totalcost"),jsonObject.getString("currency"),jsonObject.getString("paymentmode"));
+        JsonObject paymentResult = payment.paymentGateway(jsonObject.getString("userid"),jsonObject.getString("podownerid"),jsonObject.get("chargingcosts"),jsonObject.get("govttaxcost"),jsonObject.get("totalcost"), jsonObject.getString("currency"), jsonObject.getString("paymentmode"));
 
         System.out.println(paymentResult.toString());
         if (!paymentResult.containsKey("data")) {
