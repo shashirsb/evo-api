@@ -373,6 +373,7 @@ public JsonObject notificationBroker(JsonObject jsonObject) {
                 .add( "customertype",  customertype)
                 .add( "action",  action)
                 .add( "message", message )
+                .add( "status", "active")
                 .build();
                 // Create a JSON document.
                 OracleDocument doc = db.createDocumentFromString(docObject.toString());
@@ -388,126 +389,78 @@ public JsonObject notificationBroker(JsonObject jsonObject) {
                 .add( "customertype",  customertype)
                 .add( "action",  action)
                 .add( "message", message )
-                .add( "notification", "inserted")
+                .add( "status", "active")
                 .build();
             }
 
-            if(jsonObject.getString("action").toString() == "accept") {
+            if(jsonObject.getString("action").equals("accept")) {
+
+                JsonValue userid = jsonObject.get("userid");
+                JsonValue touserid = jsonObject.get("touserid");
+                JsonValue customertype = jsonObject.get("customertype");
+                JsonValue action = jsonObject.get("action");
+                JsonValue message = jsonObject.get("message");
+
+                JsonObject docObject = JSON.createObjectBuilder()
+                .add( "userid", jsonObject.get("userid"))
+                .add( "touserid",  touserid)
+                .add( "customertype",  customertype)
+                .add( "action",  action)
+                .add( "message", message )
+                .add( "status", "accepted")
+                .build();
+                // Create a JSON document.
+                OracleDocument doc = db.createDocumentFromString(docObject.toString());
+                OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + ", \"touserid\" : " + jsonObject.get("touserid") + "}");
+                // Insert the document into a collection.
+                col.find().filter(filterSpec).remove();
+                System.out.println("removed previous notification successfully ---------------------");
+                col.insert(doc);
+                System.out.println("Inserted notification successfully ---------------------");
+                return JSON.createObjectBuilder()
+                .add( "userid", jsonObject.get("userid"))
+                .add( "touserid",  touserid)
+                .add( "customertype",  customertype)
+                .add( "action",  action)
+                .add( "message", message )
+                .add( "status", "accepted")
+                .build();
 
             }
-            if(jsonObject.getString("action").toString() == "decline") {
+            if(jsonObject.getString("action").equals("decline")) {
+                
+                JsonValue userid = jsonObject.get("userid");
+                JsonValue touserid = jsonObject.get("touserid");
+                JsonValue customertype = jsonObject.get("customertype");
+                JsonValue action = jsonObject.get("action");
+                JsonValue message = jsonObject.get("message");
+
+                JsonObject docObject = JSON.createObjectBuilder()
+                .add( "userid", jsonObject.get("userid"))
+                .add( "touserid",  touserid)
+                .add( "customertype",  customertype)
+                .add( "action",  action)
+                .add( "message", message )
+                .add( "status", "declined")
+                .build();
+                // Create a JSON document.
+                OracleDocument doc = db.createDocumentFromString(docObject.toString());
+                OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + ", \"touserid\" : " + jsonObject.get("touserid") + "}");
+                // Insert the document into a collection.
+                col.find().filter(filterSpec).remove();
+                System.out.println("removed previous notification successfully ---------------------");
+                col.insert(doc);
+                System.out.println("Inserted notification successfully ---------------------");
+                return JSON.createObjectBuilder()
+                .add( "userid", jsonObject.get("userid"))
+                .add( "touserid",  touserid)
+                .add( "customertype",  customertype)
+                .add( "action",  action)
+                .add( "message", message )
+                .add( "status", "declined")
+                .build();
 
             }
-            if(jsonObject.getString("action").toString() == "get") {
-
-            }
-
-
-            
-
-        //     OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + "}");
-        //     System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
-
-        //     resultDoc = col.find().filter(filterSpec).getOne();
-        //     // System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
-        //     System.out.println(jsonObject.toString());
-
-        //     if (resultDoc != null) {
-
-        //         //JSONObject jsonobject = new JSONObject(resultDoc.getContentAsString()); 
-        //         System.out.println("User already exists, updated the user  ---------------------");
-
-        //         JsonParser jParser= Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
-
-        //         while(jParser.hasNext()){
-        //         jParser.next();
-        //         JsonObject evinfoObj  = (JsonObject) jsonObject.get("evinfo");
-        //         JsonObject evopodObj  = (JsonObject) jsonObject.get("evopod");
-
-        //         JsonValue firstname,lastname,customertype,mobile,address,chargeamount,currency,model,manufacturer,efficiency_kwh,efficiency_info,socketype,voltage,amperage,phase,latitude,longitude = jsonObject.NULL;
-
-        //          firstname = jsonObject.isNull("firstname") ? jsonObject.NULL : jsonObject.get("firstname");
-        //          lastname =  jsonObject.isNull("lastname") ? jsonObject.NULL : jsonObject.get("lastname");
-        //          customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");
-        //          mobile = jsonObject.isNull("mobile") ? jsonObject.NULL : jsonObject.get("mobile");
-        //          address = jsonObject.isNull("address") ? jsonObject.NULL : jsonObject.get("address");
-        //          chargeamount = jsonObject.isNull("chargeamount") ? jsonObject.NULL : jsonObject.get("chargeamount");
-        //          currency = jsonObject.isNull("currency") ? jsonObject.NULL : jsonObject.get("currency");
-        //          model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
-        //          manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
-        //          efficiency_kwh = evinfoObj.isNull("efficiency_kwh") ? jsonObject.NULL : evinfoObj.get("efficiency_kwh");
-        //          efficiency_info = evinfoObj.isNull("efficiency_info") ? jsonObject.NULL : evinfoObj.get("efficiency_info");
-        //          socketype = evopodObj.isNull("socketype") ? jsonObject.NULL : evopodObj.get("socketype");
-        //          voltage = evopodObj.isNull("voltage") ? jsonObject.NULL : evopodObj.get("voltage");
-        //          amperage = evopodObj.isNull("amperage") ? jsonObject.NULL : evopodObj.get("amperage");
-        //          phase = evopodObj.isNull("phase") ? jsonObject.NULL : evopodObj.get("phase");
-        //          latitude = evopodObj.isNull("latitude") ? jsonObject.NULL : evopodObj.get("latitude");
-        //          longitude = evopodObj.isNull("longitude") ? jsonObject.NULL : evopodObj.get("longitude");
-
-        //          JsonObject docObject = JSON.createObjectBuilder()
-        //                                         .add( "userid", jsonObject.get("userid"))
-        //                                         .add( "firstname",  firstname)
-        //                                         .add( "lastname",  lastname)
-        //                                         .add( "customertype",  customertype)
-        //                                         .add( "mobile", mobile )
-        //                                         .add( "address", address)
-        //                                         .add( "chargeamount", chargeamount)
-        //                                         .add( "currency", currency)
-        //                                         .add( "evinfo", JSON.createObjectBuilder()
-        //                                                             .add( "model",model )
-        //                                                             .add( "manufacturer",manufacturer )
-        //                                                             .add( "efficiency_kwh",efficiency_kwh )
-        //                                                             .add( "efficiency_info", efficiency_info )
-        //                                                             .build())
-        //                                         .add( "evopod", JSON.createObjectBuilder()
-        //                                                             .add( "socketype",socketype )
-        //                                                             .add( "voltage", voltage)
-        //                                                             .add( "amperage",amperage )
-        //                                                             .add( "phase", phase)
-        //                                                             .add( "latitude", latitude)
-        //                                                             .add( "longitude", longitude)
-        //                                                             .build())
-        //                                         .build();
-        //                         // Create a JSON document.
-        //                         OracleDocument doc = db.createDocumentFromString(docObject.toString());
-
-        //                         // Insert the document into a collection.
-        //                         col.find().filter(filterSpec).remove();
-        //                         col.insert(doc);
-        //                         System.out.println("Updated successfully ---------------------");
-
-
-        //         return singupJSON.createObjectBuilder()
-        //         .add("exists", true)
-        //         .add("data", JSON.createObjectBuilder()
-        //                             .add( "userid", jsonObject.get("userid"))
-        //                             .add( "firstname",  firstname)
-        //                             .add( "lastname",  lastname)
-        //                             .add( "customertype",  customertype)
-        //                             .add( "mobile", mobile )
-        //                             .add( "address", address)
-        //                             .add( "chargeamount", chargeamount)
-        //                             .add( "currency", currency)
-        //                             .add( "evinfo", JSON.createObjectBuilder()
-        //                                                 .add( "model",model )
-        //                                                 .add( "manufacturer",manufacturer )
-        //                                                 .add( "efficiency_kwh",efficiency_kwh )
-        //                                                 .add( "efficiency_info", efficiency_info )
-        //                                                 .build())
-        //                             .add( "evopod", JSON.createObjectBuilder()
-        //                                                 .add( "socketype",socketype )
-        //                                                 .add( "voltage", voltage)
-        //                                                 .add( "amperage",amperage )
-        //                                                 .add( "phase", phase)
-        //                                                 .add( "latitude", latitude)
-        //                                                 .add( "longitude", longitude)
-        //                                                 .build())
-        //                             .build())
-        //         .build();               
-            
-
-        //     } 
-        // }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -518,6 +471,101 @@ return JSON.createObjectBuilder()
             .add("exists", false)
             .build();
 }
+
+public JsonArray findNotification(JsonObject jsonObject) {
+    JsonArrayBuilder builder = Json.createArrayBuilder();
+    try {
+        OracleCollection col = this.db.admin().createCollection("notification");
+        // Find all documents in the collection.
+        OracleDocument oraDoc,filterSpec,
+        resultDoc = null;
+        String jsonFormattedString = null;
+
+        JsonValue userid = jsonObject.get("userid");
+        JsonValue status = jsonObject.get("status");
+
+        if(jsonObject.getString("status").equals("active")) {
+            filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + ", \"status\": \"active\"}");
+            System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
+        }
+
+        if(jsonObject.getString("status").equals("accepted")) {
+            filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + ", \"status\": \"accepted\"}");
+            System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
+        }
+
+        if(jsonObject.getString("status").equals("declined")) {
+            filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + ", \"status\": \"declined\"}");
+            System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
+
+        }
+
+        
+
+        //resultDoc = col.find().filter(filterSpec).getOne();
+
+        OracleCursor c = col.find().filter(filterSpec).getCursor();
+
+        while (c.hasNext()) {
+            resultDoc = c.next();
+         System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
+        // System.out.println(resultDoc.equals(null));  
+        //,{\"evopod\": {\"$not\" : {\"$eq\" : {}}}}
+        //{\"evopod\": {\"amperage\": {\"$not\" : {\"$eq\" : \"\"}}}}
+
+        if (resultDoc != null) {
+            System.out.println("1-------------------------");
+            JsonParser jParser=  Json.createParser(new ByteArrayInputStream(resultDoc.getContentAsString().getBytes()));
+            while(jParser.hasNext()){
+                jParser.next();
+                JsonObject jsonObject = jParser.getObject();
+
+        System.out.println("3-------------------------");
+
+
+            JsonValue userid = jsonObject.isNull("userid") ? jsonObject.NULL : jsonObject.get("userid");
+            JsonValue touserid = jsonObject.isNull("touserid") ? jsonObject.NULL : jsonObject.get("touserid");
+            JsonValue customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");
+            JsonValue action = jsonObject.isNull("action") ? jsonObject.NULL : jsonObject.get("action");
+            JsonValue message = jsonObject.isNull("message") ? jsonObject.NULL : jsonObject.get("message");
+            JsonValue status = jsonObject.isNull("status") ? jsonObject.NULL : jsonObject.get("status");
+            
+
+
+           
+
+             builder.add(singupJSON.createObjectBuilder()
+            .add("exists", true)
+            .add("data", JSON.createObjectBuilder()
+                                .add( "userid", jsonObject.get("userid"))
+                                .add( "touserid",  touserid)
+                                .add( "customertype",  customertype)
+                                .add( "action",  action)
+                                .add( "message", message )
+                                .add( "status", status)
+                                .build())
+            .build()   
+             );
+
+}
+}
+        
+        System.out.println("4-------------------------");
+        }
+        JsonArray arr = builder.build();
+        return arr;
+        } catch (Exception e) {
+           e.printStackTrace();
+        }
+        System.out.println("5-------------------------");
+        builder.add( JSON.createObjectBuilder()
+        .add( "atpsoda", "found 0")
+        .build());
+        JsonArray arr = builder.build();
+        return arr;
+}
+
+
 	
 	public String createData() {
 

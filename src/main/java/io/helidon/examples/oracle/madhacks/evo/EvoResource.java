@@ -527,7 +527,55 @@ public class EvoResource {
         JsonObject notificationResult = notification.notificationBroker(jsonObject);
 
         System.out.println(notificationResult.toString());
-        if (!notificationResult.containsKey("data")) {
+        if (!notificationResult.containsKey("status")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("info", "declined")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        JsonObject notificationReponse = JSON.createObjectBuilder()
+                    .add("info", "success")
+                    .add("data", notificationResult)
+                    .build();
+
+        return Response.status(Response.Status.OK ).entity(notificationReponse).build();
+      
+    }
+
+        /**
+     * Return a greeting message using the name that was provided.
+     *
+     * @param name the name to greet
+     * @return {@link JsonObject}
+     */
+    @SuppressWarnings("checkstyle:designforextension")
+    @Path("/getnotification")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @RequestBody(name = "userid",
+            required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(type = SchemaType.STRING, example = "{\"userid\" : \"shashi\"}")))
+    @APIResponses({
+            @APIResponse(name = "normal", responseCode = "204", description = "Calculation done successfull!!"),
+            @APIResponse(name = "missing 'User'", responseCode = "400",
+                    description = "JSON did not contain setting for 'user'")})
+    public Response getNotification(JsonObject jsonObject) {
+            System.out.println("Inside notification rest api");
+        if (!jsonObject.containsKey("userid")) {
+            JsonObject entity = JSON.createObjectBuilder()
+                    .add("error", "No userid provided")
+                    .build();
+            return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
+        }
+
+        Notification notification =new Notification();
+        JsonArray notificationResult = notification.findNotification(jsonObject);
+
+        System.out.println(notificationResult.toString());
+        if (notificationResult.isEmpty()) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "declined")
                     .build();
