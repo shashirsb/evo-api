@@ -479,7 +479,8 @@ public JsonArray findNotification(JsonObject jsonObject) {
     try {
         OracleCollection col = this.db.admin().createCollection("notification");
         // Find all documents in the collection.
-        OracleDocument oraDoc,filterSpec, resultDoc = null;
+        OracleDocument oraDoc,resultDoc = null;
+        OracleDocument filterSpec = this.db.createDocumentFromString("{}");
         String jsonFormattedString = null;
 
         JsonValue userid = jsonObject.get("userid");
