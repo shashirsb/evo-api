@@ -108,7 +108,8 @@ public class Calculator  {
             OracleDocument oraDoc,
             resultDoc = null;
             String jsonFormattedString = null;
-
+            Float powersupplierrate = 10.00;
+            Float govttax = 15.00;
             OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : \"" + podownerid + "\"}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
@@ -137,18 +138,25 @@ public class Calculator  {
                 Float pricePerkWh = Float.parseFloat(jsonObject.get("chargeamount").toString());
                 Float chargingCosts = ((Float.parseFloat(consumedpowerinwatts.toString()) * Float.parseFloat(consumedpowerinhours.toString()))/1000) * pricePerkWh;
                   
-
+                Float powersuppliercosts = chargingCosts * (powersupplierrate/100);
+                Float govttaxcost = chargingCosts * (govttax/100);
+                Float totalcost = chargingCosts * (1 + ((powersupplierrate + govttax)/100));
   
 
                 return singupJSON.createObjectBuilder()
                 .add("data", JSON.createObjectBuilder()
-                                    .add( "userid", jsonObject.get("userid"))
+                                    .add( "userid", userid)
                                     .add( "podownerid",  podownerid)
                                     .add( "consumedpowerinwatts", consumedpowerinwatts )
                                     .add( "consumedpowerinhours", consumedpowerinhours)
-                                    .add( "pricePerkWh", pricePerkWh)
-                                    .add( "chargingCosts", chargingCosts)
+                                    .add( "priceperkwh", pricePerkWh)
+                                    .add( "chargingcosts", chargingCosts)
                                     .add( "currency", currency)
+                                    .add( "powersupplierrate", powersupplierrate +"%")
+                                    .add( "powersuppliercosts", powersuppliercosts)
+                                    .add( "govttax", govttax +"%")
+                                    .add( "govttaxcost", govttaxcost)
+                                    .add( "totalcost", totalcost)
                                     .build())
                 .build();      
                 
