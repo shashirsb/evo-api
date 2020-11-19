@@ -135,14 +135,6 @@ public class Payment  {
                                     .add( "status", "payment" + paymentmode + " was completed at" + new Date().getTime())
                                     .build())
                 .build();      
-                
-
-                
-
-
-
-
-            System.out.println("4-------------------------");
 
             } catch (Exception e) {
                e.printStackTrace();
