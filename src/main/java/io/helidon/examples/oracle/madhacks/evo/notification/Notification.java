@@ -347,6 +347,7 @@ return JSON.createObjectBuilder()
     
 
 public JsonObject notificationBroker(JsonObject jsonObject) {
+    System.out.println("Inside notification Broker---------------------");
 
     try {
         
@@ -358,8 +359,8 @@ public JsonObject notificationBroker(JsonObject jsonObject) {
             OracleDocument oraDoc,
             resultDoc = null;
             String jsonFormattedString = null;
-        
-            if(jsonObject.getString("action").toString() == "set") {
+
+            if(jsonObject.getString("action").equals("set")) {
                 JsonValue userid = jsonObject.get("userid");
                 JsonValue touserid = jsonObject.get("touserid");
                 JsonValue customertype = jsonObject.get("customertype");
