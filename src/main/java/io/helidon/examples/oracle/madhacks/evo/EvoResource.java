@@ -427,7 +427,7 @@ public class EvoResource {
 
         String _userid = jsonObject.getString("userid");
         Calculator calculator =new Calculator();
-        JsonObject calculatorResult = calculator.findChargeCost(jsonObject.getString("userid"),jsonObject.getString("podownerid"),jsonObject.getString("consumedpowerinwatts"),jsonObject.getString("consumedpowerinhours"));
+        JsonObject calculatorResult = calculator.findChargeCost(jsonObject.getString("userid"),jsonObject.getString("podownerid"),jsonObject.get("consumedpowerinwatts"),jsonObject.get("consumedpowerinhours"));
 
         System.out.println(calculatorResult.toString());
         if (!calculatorResult.containsKey("data")) {
