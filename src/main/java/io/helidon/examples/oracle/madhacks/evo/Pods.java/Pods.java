@@ -66,7 +66,9 @@ import oracle.soda.OracleException;
 
 import javax.json.Json;
 import javax.json.JsonBuilderFactory;
+import javax.json.JsonArrayBuilder;
 import javax.json.JsonObject;
+import javax.json.JsonArray;
 import javax.json.JsonValue;
 import javax.ws.rs.Consumes;
 
@@ -106,7 +108,8 @@ public class Pods  {
 	// 	}
 	// }
 
-    public JsonObject findPods(String filter, String current, String desired, String _latitude, String _longitude) {
+    public JsonArray findPods(String filter, String current, String desired, String _latitude, String _longitude) {
+        JsonArrayBuilder builder = Json.createArrayBuilder();
         try {
             OracleCollection col = this.db.admin().createCollection("users");
             // Find all documents in the collection.
@@ -117,9 +120,12 @@ public class Pods  {
             OracleDocument filterSpec = db.createDocumentFromString("{\"evopod\": {\"amperage\": {\"$not\" : {\"$eq\" : \"\"}}}}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
-            resultDoc = col.find().filter(filterSpec).getOne();
+            //resultDoc = col.find().filter(filterSpec).getOne();
 
+            OracleCursor c = col.find().filter(filterSpec);
 
+            while (c.hasNext()) {
+                resultDoc = c.next();
              System.out.println("resultDoc: -------" + resultDoc.getContentAsString());
             // System.out.println(resultDoc.equals(null));  
             //,{\"evopod\": {\"$not\" : {\"$eq\" : {}}}}
@@ -154,8 +160,7 @@ public class Pods  {
                  latitude = evopodObj.isNull("latitude") ? jsonObject.NULL : evopodObj.get("latitude");
                  longitude = evopodObj.isNull("longitude") ? jsonObject.NULL : evopodObj.get("longitude");               
 
-
-                return singupJSON.createObjectBuilder()
+                 builder.add(singupJSON.createObjectBuilder()
                 .add("exists", true)
                 .add("data", JSON.createObjectBuilder()
                                     .add( "userid", jsonObject.get("userid"))
@@ -179,19 +184,25 @@ public class Pods  {
                                                         .add( "longitude", longitude)
                                                         .build())
                                     .build())
-                .build();      
+                .build()   
+                 );
+
     }
 }
             
             System.out.println("4-------------------------");
-
+            }
+            JsonArray arr = builder.build();
+            return arr;
             } catch (Exception e) {
                e.printStackTrace();
             }
             System.out.println("5-------------------------");
-            return JSON.createObjectBuilder()
+            builder.add( JSON.createObjectBuilder()
             .add( "atpsoda", "found 0")
-            .build();
+            .build());
+            JsonArray arr = builder.build();
+            return arr;
 }
 
 
