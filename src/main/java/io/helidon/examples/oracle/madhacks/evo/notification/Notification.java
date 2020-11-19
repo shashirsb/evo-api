@@ -487,17 +487,17 @@ public JsonArray findNotification(JsonObject jsonObject) {
         JsonValue status = jsonObject.get("status");
 
         if(jsonObject.getString("status").equals("active")) {
-            filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + ", \"status\": \"active\"}");
+            filterSpec = this.db.createDocumentFromString("{\"$or\" : [ { \"userid\" : " + jsonObject.get("userid") + ", \"status\": \"active\"},{ \"touserid\" : " + jsonObject.get("userid") + ", \"status\": \"active\"} ]}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
         }
 
         if(jsonObject.getString("status").equals("accepted")) {
-            filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + ", \"status\": \"accepted\"}");
+            filterSpec = this.db.createDocumentFromString("{\"$or\" : [ { \"userid\" : " + jsonObject.get("userid") + ", \"status\": \"accepted\"},{ \"touserid\" : " + jsonObject.get("userid") + ", \"status\": \"accepted\"} ]}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
         }
 
         if(jsonObject.getString("status").equals("declined")) {
-            filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + ", \"status\": \"declined\"}");
+            filterSpec = this.db.createDocumentFromString("{\"$or\" : [ { \"userid\" : " + jsonObject.get("userid") + ", \"status\": \"declined\"},{ \"touserid\" : " + jsonObject.get("userid") + ", \"status\": \"declined\"} ]}");
             System.out.println("filterSpec: -------" + filterSpec.getContentAsString());
 
         }
