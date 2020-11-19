@@ -123,7 +123,7 @@ public class Calculator  {
                     jParser.next();
                     JsonObject jsonObject = jParser.getObject();
           
-        if(podownerid.equals(jsonObject.getString("podownerid"))) {
+        if(podownerid.equals(jsonObject.getString("userid"))) {
             System.out.println("3-------------------------");
 
 
