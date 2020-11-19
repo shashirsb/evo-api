@@ -360,11 +360,11 @@ public JsonObject notificationBroker(JsonObject jsonObject) {
             String jsonFormattedString = null;
         
             if(jsonObject.getString("action").toString() == "set") {
-                String userid = jsonObject.get("userid");
-                String touserid = jsonObject.get("touserid");
-                String customertype = jsonObject.get("customertype");
-                String action = jsonObject.get("action");
-                String message = jsonObject.get("message");
+                JsonValue userid = jsonObject.get("userid");
+                JsonValue touserid = jsonObject.get("touserid");
+                JsonValue customertype = jsonObject.get("customertype");
+                JsonValue action = jsonObject.get("action");
+                JsonValue message = jsonObject.get("message");
 
                 JsonObject docObject = JSON.createObjectBuilder()
                 .add( "userid", jsonObject.get("userid"))
@@ -375,9 +375,10 @@ public JsonObject notificationBroker(JsonObject jsonObject) {
                 .build();
                 // Create a JSON document.
                 OracleDocument doc = db.createDocumentFromString(docObject.toString());
-
+                OracleDocument filterSpec = this.db.createDocumentFromString("{ \"userid\" : " + jsonObject.get("userid") + ", \"touserid\" : " + jsonObject.get("touserid") + "}");
                 // Insert the document into a collection.
                 col.find().filter(filterSpec).remove();
+                System.out.println("removed previous notification successfully ---------------------");
                 col.insert(doc);
                 System.out.println("Inserted notification successfully ---------------------");
                 return JSON.createObjectBuilder()
