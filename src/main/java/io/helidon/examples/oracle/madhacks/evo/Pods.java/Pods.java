@@ -148,11 +148,7 @@ public class Pods  {
                  lastname =  jsonObject.isNull("lastname") ? jsonObject.NULL : jsonObject.get("lastname");
                  customertype = jsonObject.isNull("customertype") ? jsonObject.NULL : jsonObject.get("customertype");
                  mobile = jsonObject.isNull("mobile") ? jsonObject.NULL : jsonObject.get("mobile");
-                 address = jsonObject.isNull("address") ? jsonObject.NULL : jsonObject.get("address");
-                 model = evinfoObj.isNull("model") ? jsonObject.NULL : evinfoObj.get("model");
-                 manufacturer = evinfoObj.isNull("manufacturer") ? jsonObject.NULL : evinfoObj.get("manufacturer");
-                 efficiency_kwh = evinfoObj.isNull("efficiency_kwh") ? jsonObject.NULL : evinfoObj.get("efficiency_kwh");
-                 efficiency_info = evinfoObj.isNull("efficiency_info") ? jsonObject.NULL : evinfoObj.get("efficiency_info");
+                 address = jsonObject.isNull("address") ? jsonObject.NULL : jsonObject.get("address");                
                  socketype = evopodObj.isNull("socketype") ? jsonObject.NULL : evopodObj.get("socketype");
                  voltage = evopodObj.isNull("voltage") ? jsonObject.NULL : evopodObj.get("voltage");
                  amperage = evopodObj.isNull("amperage") ? jsonObject.NULL : evopodObj.get("amperage");
@@ -168,13 +164,15 @@ public class Pods  {
                                     .add( "lastname",  lastname)
                                     .add( "customertype",  customertype)
                                     .add( "mobile", mobile )
+                                    .add( "rating", 4.5)
+                                    .add( "queue", 0)
+                                    .add( "available", true )
+                                    .add( "distance", "1.2")
+                                    .add( "distanceunit", "miles")
+                                    .add( "distancetimeinminutes", "30")
+                                    .add( "chargeamount", 20)
+                                    .add( "chargeamountcurrency", "$")
                                     .add( "address", address)
-                                    .add( "evinfo", JSON.createObjectBuilder()
-                                                        .add( "model",model )
-                                                        .add( "manufacturer",manufacturer )
-                                                        .add( "efficiency_kwh",efficiency_kwh )
-                                                        .add( "efficiency_info", efficiency_info )
-                                                        .build())
                                     .add( "evopod", JSON.createObjectBuilder()
                                                         .add( "socketype",socketype )
                                                         .add( "voltage", voltage)
