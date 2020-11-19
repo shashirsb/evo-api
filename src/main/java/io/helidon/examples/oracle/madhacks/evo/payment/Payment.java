@@ -132,7 +132,7 @@ public class Payment  {
                                     .add( "totalcost", totalcost)
                                     .add( "currency", currency)
                                     .add( "paymentmode", paymentmode)
-                                    .add( "status", "payment" + paymentmode + " was completed at" + new Date().getTime())
+                                    .add( "status", "payment using " + paymentmode + " was completed at " + new Date())
                                     .build())
                 .build();      
 
