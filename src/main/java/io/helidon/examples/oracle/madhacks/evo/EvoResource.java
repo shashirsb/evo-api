@@ -578,6 +578,7 @@ public class EvoResource {
         if (notificationResult.isEmpty()) {
             JsonObject entity = JSON.createObjectBuilder()
                     .add("info", "declined")
+                    .add("data", "0 found")
                     .build();
             return Response.status(Response.Status.BAD_REQUEST).entity(entity).build();
         }
