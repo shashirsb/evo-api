@@ -117,7 +117,7 @@ public class Payment  {
                 .build();
 
                 // Create a JSON document.
-                col = db.admin().createCollection("payment");
+                OracleCollection col = db.admin().createCollection("payment");
 				OracleDocument doc = db.createDocumentFromString(docObject.toString());
 
 				// Insert the document into a collection.
