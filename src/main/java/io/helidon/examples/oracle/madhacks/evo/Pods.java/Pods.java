@@ -158,6 +158,7 @@ public class Pods  {
 
                  builder.add(singupJSON.createObjectBuilder()
                 .add("exists", true)
+                .add( "userid", jsonObject.get("userid"))
                 .add("data", JSON.createObjectBuilder()
                                     .add( "userid", jsonObject.get("userid"))
                                     .add( "firstname",  firstname)
