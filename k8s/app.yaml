@@ -9,7 +9,7 @@ kind: Deployment
 metadata:
   name: evo-api
   labels:
-    component: sockshop
+    component: evo
 spec:
   replicas: 1
   selector:
@@ -29,7 +29,7 @@ spec:
       - name: evo-api
         image: shashioracle/helidon-oracle-madhacks-evo:latest
         volumeMounts:
-        - mountPath: /home/opc/Wallet_sockshopdb
+        - mountPath: /home/opc/Wallet_atpsodadb
           name: atp-secret
           readOnly: true
 
@@ -40,12 +40,12 @@ kind: Service
 metadata:
   annotations:
     kubectl.kubernetes.io/last-applied-configuration: |
-      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"evo-api","component":"sockshop"},"name":"evo-api","namespace":"sockshop-atpsoda"},"spec":{"ports":[{"name":"http","port":80,"targetPort":7001}],"selector":{"app":"evo-api"}}}
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"evo-api","component":"evo"},"name":"evo-api","namespace":"evo-atpsoda"},"spec":{"ports":[{"name":"http","port":80,"targetPort":7001}],"selector":{"app":"evo-api"}}}
   labels:
     app: evo-api
-    component: sockshop
+    component: evo
   name: evo-api
-  namespace: sockshop-atpsoda
+  namespace: evo-atpsoda
 spec:
   ports:
   - name: http
