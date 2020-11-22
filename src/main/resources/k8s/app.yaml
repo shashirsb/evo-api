@@ -51,7 +51,7 @@ spec:
   - name: http
     port: 80
     protocol: TCP
-    targetPort: 7001
+    targetPort: 8080
   selector:
     app: evo-api
   sessionAffinity: None
