@@ -27,7 +27,7 @@ spec:
           secretName: atp-secret
       containers:
       - name: evo-api
-        image: shashioracle/evo-api-atpsoda:2.0.0
+        image: shashioracle/helidon-oracle-madhacks-evo:latest
         volumeMounts:
         - mountPath: /home/opc/Wallet_sockshopdb
           name: atp-secret
