@@ -1,0 +1,60 @@
+#
+# Copyright (c) 2020 Oracle and/or its affiliates.
+#
+# Licensed under the Universal Permissive License v 1.0 as shown at
+# http://oss.oracle.com/licenses/upl.
+#
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: evo-api
+  labels:
+    component: sockshop
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: evo-api
+  template:
+    metadata:
+      labels:
+        app: evo-api
+    spec:
+      volumes:
+      - name: atp-secret
+        secret:
+          defaultMode: 420
+          secretName: atp-secret
+      containers:
+      - name: evo-api
+        image: shashioracle/evo-api-atpsoda:2.0.0
+        volumeMounts:
+        - mountPath: /home/opc/Wallet_sockshopdb
+          name: atp-secret
+          readOnly: true
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"evo-api","component":"sockshop"},"name":"evo-api","namespace":"sockshop-atpsoda"},"spec":{"ports":[{"name":"http","port":80,"targetPort":7001}],"selector":{"app":"evo-api"}}}
+  labels:
+    app: evo-api
+    component: sockshop
+  name: evo-api
+  namespace: sockshop-atpsoda
+spec:
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 7001
+  selector:
+    app: evo-api
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
