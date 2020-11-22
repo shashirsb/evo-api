@@ -66,7 +66,7 @@ public class EvoProvider {
     private static boolean UseDB = true;
     private final static String ATP_CONNECT_NAME = "sockshopdb_medium";
     private final static String ATP_PASSWORD_FILENAME = "atp_password.txt";
-    private final static String WALLET_LOCATION = "/home/opc/Wallet_sockshopdb";
+    private final static String WALLET_LOCATION = "/home/opc/Wallet_atpsodadb";
     private final static String DB_URL = "jdbc:oracle:thin:@" + ATP_CONNECT_NAME + "?TNS_ADMIN=" + WALLET_LOCATION;
     private final static String DB_USER = "admin";
     private static String DB_PASSWORD;
