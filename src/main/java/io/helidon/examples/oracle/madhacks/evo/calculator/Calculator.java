@@ -180,10 +180,7 @@ public class Calculator  {
                                     .add( "govttaxcost", govttaxcost)
                                     .add( "totalcost", totalcost)
                                     .build())
-                .build();      
-                
-
-                
+                .build();            
 
 
 

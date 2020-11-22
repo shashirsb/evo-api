@@ -22,8 +22,8 @@ FROM scratch
 WORKDIR /helidon
 
 # Copy the binary built in the 1st stage
-COPY --from=build /helidon/target/helidon-quickstart-mp .
+COPY --from=build /helidon/target/helidon-oracle-madhacks-evo .
 
-ENTRYPOINT ["./helidon-quickstart-mp"]
+ENTRYPOINT ["./helidon-oracle-madhacks-evo"]
 
 EXPOSE 8080

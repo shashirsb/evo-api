@@ -32,6 +32,13 @@
     <version>1.0-SNAPSHOT</version>
     <name>evo-api</name>
 
+    <properties>
+        <mainClass>io.helidon.microprofile.server.Main</mainClass>
+        <docker.repo>helidon/sockshop</docker.repo>
+        <docker.version>${project.version}</docker.version>
+        <jib.goal>dockerBuild</jib.goal>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>io.helidon.microprofile.bundles</groupId>
@@ -144,6 +151,93 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.20.1</version>
+                <executions>
+                    <execution>
+                        <id>prepare-it-database</id>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                        <configuration>
+                            <images>
+                                <image>
+                                    <name>mongo:4.2.2</name>
+                                    <alias>shipping-db</alias>
+                                    <run>
+                                        <ports>
+                                            <port>db.port:27017</port>
+                                        </ports>
+                                        <wait>
+                                            <log>(?s)waiting for connections on port 27017
+                                            </log>
+                                            <time>10000</time>
+                                        </wait>
+                                    </run>
+                                </image>
+                            </images>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>remove-it-database</id>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>docker</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.google.cloud.tools</groupId>
+                        <artifactId>jib-maven-plugin</artifactId>
+                        <version>${version.plugin.jib}</version>
+                        <configuration>
+                            <from>
+                                <image>gcr.io/distroless/java@sha256:9d4092ba5e1c9dc4d1490fdead1dd7ea5c64e635b729fee11a6af55f51b337f8</image>
+                            </from>
+                            <to>
+                                <image>${docker.repo}/${project.artifactId}</image>
+                                <tags>
+                                    <tag>${docker.version}</tag>
+                                </tags>
+                            </to>
+                            <container>
+                                <!-- good defaults intended for containers -->
+                                <jvmFlags>
+                                    <jvmFlag>-server</jvmFlag>
+                                    <jvmFlag>-Djava.awt.headless=true</jvmFlag>
+                                    <jvmFlag>-XshowSettings:all</jvmFlag>
+                                    <jvmFlag>-XX:+PrintCommandLineFlags</jvmFlag>
+                                    <jvmFlag>-XX:+UnlockDiagnosticVMOptions</jvmFlag>
+                                    <jvmFlag>-XX:InitialRAMPercentage=70</jvmFlag>
+                                    <jvmFlag>-XX:MinRAMPercentage=70</jvmFlag>
+                                    <jvmFlag>-XX:MaxRAMPercentage=70</jvmFlag>
+                                </jvmFlags>
+                                <ports>
+                                    <port>7001</port>
+                                </ports>
+                            </container>
+                            <containerizingMode>packaged</containerizingMode>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>${jib.goal}</goal>
+                                </goals>
+                                <phase>package</phase>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
